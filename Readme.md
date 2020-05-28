@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Yanina Synyavska](https://up.htmlacademy.ru/javascript/20/user/1113601).
-* Наставник: `Неизвестно`.
+* Наставник: Иван Марченко.
 
 ---
 
