@@ -1,10 +1,10 @@
-"use strict"
+'use strict';
 var HOUSING = ['palace', 'flat', 'house', 'bungalo'];
 var CHECKINS = ['12:00', '13:00', '14:00'];
 var CHECKOUTS = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-var X  = [20, 30, 35, 40, 50, 60, 65, 70];
+var X = [20, 30, 35, 40, 50, 60, 65, 70];
 var Y = [130, 140, 145, 150, 160, 200, 300, 500];
 
 var address = '600, 350';
@@ -14,19 +14,19 @@ var guests = 6;
 var description = 'description';
 var quantity = 8;
 
-var createPins = function (quantity) {
+var createPins = function (pinsQuantity) {
 
   var pins = [];
 
-   for (var i = 1; i <= quantity; i++) {
+  for (var i = 1; i <= pinsQuantity; i++) {
     var pin =
       {
 
         author: {
-            avatar : 'img/avatars/user' + padNumber(i, 2) + '.png',
-       },
+          avatar: pin.author.avatar  + padNumber(i, 2) + '.png',
+        },
         offer: {
-          title: title,
+          title: pin.offer.title,
           address: address,
           price: price,
           type: getRandomElement(HOUSING),
@@ -37,27 +37,23 @@ var createPins = function (quantity) {
           features: getRandomElement(FEATURES),
           description: description,
           photos: PHOTOS
-      },
-      location: {
+        },
+        location: {
           x: getRandomElement(X),
           y: getRandomElement(Y)
-      }
+        }
+      };
+
+    pins.push(pin);
   }
-
-   pins.push(pin);
-   }
   return pins;
-  };
+};
 var padNumber = function (num, size) {
-  var s = num +"";
-
-    while (s.length < size) s = "0" + s;
+  var s = num + '';
+  while (s.length < size) {
+    s = '0' + s;
     return s;
-
-}
-
-
-console.log(pins);
+};
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
@@ -67,12 +63,9 @@ var getRandomElement = function (array) {
   return array[randomIndex];
 };
 
-
 var mapPins = document.querySelectorAll('.map__pins');
 var pinTemplate = document.querySelector('#pin')
  .content;
-
-//console.log(pinTemplate);
 
 var renderPin = function (pin) {
   var pinElement = pinTemplate.cloneNode(true);
@@ -81,8 +74,7 @@ var renderPin = function (pin) {
   pinElement.querySelector('img').alt = pin.offer.title;
   pinElement.style = 'left:'+ pin.location.x + 'px; top:' + pin.location.y + 'px';
 
-
-  return pinElement;
+return pinElement;
 };
 
 var pins = createPins(quantity);
@@ -90,5 +82,5 @@ var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < quantity; i++) {
   fragment.appendChild(renderPin(pins[i]));
-}
+ }
 mapPins.appendChild(fragment);
