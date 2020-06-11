@@ -7,6 +7,7 @@ var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 var X = [20, 30, 35, 40, 50, 60, 65, 70];
 var Y = [130, 140, 145, 150, 160, 200, 300, 500];
 
+var title = title;
 var address = '600, 350';
 var price = 1000;
 var rooms = 4;
@@ -23,10 +24,10 @@ var createPins = function (pinsQuantity) {
       {
 
         author: {
-          avatar: pin.author.avatar  + padNumber(i, 2) + '.png',
+          avatar: 'img/avatars/user' + padNumber(i, 2) + '.png',
         },
         offer: {
-          title: pin.offer.title,
+          title: title,
           address: address,
           price: price,
           type: getRandomElement(HOUSING),
@@ -52,7 +53,8 @@ var padNumber = function (num, size) {
   var s = num + '';
   while (s.length < size) {
     s = '0' + s;
-    return s;
+  }
+  return s;
 };
 
 var map = document.querySelector('.map');
@@ -74,7 +76,7 @@ var renderPin = function (pin) {
   pinElement.querySelector('img').alt = pin.offer.title;
   pinElement.style = 'left:'+ pin.location.x + 'px; top:' + pin.location.y + 'px';
 
-return pinElement;
+  return pinElement;
 };
 
 var pins = createPins(quantity);
@@ -82,5 +84,5 @@ var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < quantity; i++) {
   fragment.appendChild(renderPin(pins[i]));
- }
+}
 mapPins.appendChild(fragment);
