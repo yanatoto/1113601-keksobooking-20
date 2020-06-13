@@ -15,15 +15,15 @@ var createPins = function (pinsQuantity) {
         offer: {
           title: 'title',
           address: '600, 350',
-          price: 1000,
-          type: 'palace',
-          rooms: 6,
-          guests: 8,
-          checkin: '14:00',
-          checkout: '12:00',
-          features: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
+          price: getRandomArbitrary(10000, 50000),
+          type: getRandomElement(['palace', 'flat', 'house', 'bungalo']),
+          rooms: getRandomArbitrary(1, 5),
+          guests: getRandomArbitrary(1, 10),
+          checkin: getRandomElement(['12:00', '13:00', '14:00']),
+          checkout: getRandomElement(['12:00', '13:00', '14:00']),
+          features: getRandomElement(['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']),
           description: 'description',
-          photos: ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg']
+          photos: getRandomElement(['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'])
         },
         location: {
           x: getRandomArbitrary(0, ((document.querySelector('.map__pins').offsetWidth) - 100)),
@@ -44,15 +44,20 @@ var padNumber = function (num, size) {
   return s;
 };
 
-function getRandomArbitrary(min, max) {
+var getRandomArbitrary = function (min, max) {
   return Math.random() * (max - min) + min;
-}
+};
+
+var getRandomElement = function (array) {
+  var randomIndex = Math.floor(Math.random() * (array.length - 1));
+  return array[randomIndex];
+};
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
 var mapPins = document.querySelector('.map__pins');
-var buttonTemplate = document.querySelector('button');
+var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
 
 var renderPin = function (pin) {
   var pinElement = buttonTemplate.cloneNode(true);
