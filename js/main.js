@@ -9,6 +9,9 @@ var createPins = function (pinsQuantity) {
   var pins = [];
 
   for (var i = 1; i <= pinsQuantity; i++) {
+    var locationX = getRandomArbitrary(0, ((document.querySelector('.map__pins').offsetWidth) - 100) - PIN_WIDTH / 2);
+    var locationY = getRandomArbitrary(130, 630) - PIN_HEIGHT;
+
     var pin =
       {
 
@@ -51,8 +54,6 @@ var padNumber = function (num, size) {
 var getRandomArbitrary = function (min, max) {
   return Math.random() * (max - min) + min;
 };
-var locationX = getRandomArbitrary(0, ((document.querySelector('.map__pins').offsetWidth) - 100) - PIN_WIDTH / 2);
-var locationY = getRandomArbitrary(130, 630) - PIN_HEIGHT;
 
 var getRandomElement = function (array) {
   var randomIndex = Math.floor(Math.random() * (array.length - 1));
