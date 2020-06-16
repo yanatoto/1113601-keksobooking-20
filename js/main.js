@@ -1,4 +1,8 @@
 'use strict';
+var PIN_WIDTH = 50;
+var PIN_HEIGHT = 70;
+var locationX = getRandomArbitrary(0, ((document.querySelector('.map__pins').offsetWidth) - 100)) - PIN_WIDTH / 2;
+var locationY = getRandomArbitrary(130, 630) - PIN_HEIGHT;
 var quantity = 8;
 
 var createPins = function (pinsQuantity) {
@@ -14,20 +18,21 @@ var createPins = function (pinsQuantity) {
         },
         offer: {
           title: 'title',
-          address: '600, 350',
+          address: locationX + ', ' + locationY,
           price: getRandomArbitrary(10000, 50000),
           type: getRandomElement(['palace', 'flat', 'house', 'bungalo']),
           rooms: getRandomArbitrary(1, 5),
           guests: getRandomArbitrary(1, 10),
           checkin: getRandomElement(['12:00', '13:00', '14:00']),
           checkout: getRandomElement(['12:00', '13:00', '14:00']),
-          features: getRandomElement(['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']),
+          features: getRandomSubset(['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner']),
+
           description: 'description',
-          photos: getRandomElement(['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'])
+          photos: getRandomSubset(['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'])
         },
         location: {
-          x: getRandomArbitrary(0, ((document.querySelector('.map__pins').offsetWidth) - 100)),
-          y: getRandomArbitrary(130, 630)
+          x: locationX,
+          y: locationY
         }
       };
 
@@ -53,6 +58,18 @@ var getRandomElement = function (array) {
   return array[randomIndex];
 };
 
+
+var getRandomSubset = function (array) {
+  var newArray = [];
+
+  for (var i = 0; i < array.length; i++) {
+    if (Math.random() > 0.3) {
+      newArray.push(array[i]);
+    }
+  }
+  return newArray;
+};
+
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
@@ -76,4 +93,3 @@ for (var i = 0; i < quantity; i++) {
   fragment.appendChild(renderPin(pins[i]));
 }
 mapPins.appendChild(fragment);
-
