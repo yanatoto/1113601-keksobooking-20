@@ -190,36 +190,49 @@ titleInput.addEventListener('invalid', function () {
   }
 });
 
-var roomNumberSelect = document.querySelector('#room_number');
-var capacitySelect = document.querySelector('#capacity');
+var avatarInput = document.querySelector('#avatar');
 
-capacitySelect.addEventListener('invalid', function () {
-
-  if (roomNumberSelect.value === '3') {
-    capacitySelect.value.setCustomValidity('[1-3]');
-    if (capacitySelect.value.validity.patternMismatch) {
-      capacitySelect.value.setCustomValidity('Для 3-х комнат можно выбрать 1-го, 2-х или 3-х гостей');
-    }
-  } else if (roomNumberSelect.value === '2') {
-    capacitySelect.value.setCustomValidity('[1-2]');
-    if (capacitySelect.value.validity.patternMismatch) {
-      capacitySelect.value.setCustomValidity('Для 2-х комнат можно выбрать 1-го или 2-х гостей');
-    }
-  } else if (roomNumberSelect.value === '1') {
-    capacitySelect.value.setCustomValidity('1');
-    if (capacitySelect.value.validity.patternMismatch) {
-      capacitySelect.value.setCustomValidity('Для 1-й комнаты можно выбрать только 1-го гостя');
-    }
-  } else if (roomNumberSelect.value === '100') {
-    capacitySelect.value.setCustomValidity('0');
-    if (capacitySelect.value.validity.patternMismatch) {
-      capacitySelect.value.setCustomValidity('Для 100 комнат можно выбрать: не для гостей');
-    }
+avatarInput.addEventListener('invalid', function () {
+  if (avatarInput.validity.typeMismatch) {
+    avatarInput.setCustomValidity('Аватар должен быть изображением');
   } else {
-    capacitySelect.value.setCustomValidity('');
+    avatarInput.setCustomValidity('');
   }
 });
 
+var images = document.querySelector('.ad-form__photo-container');
+var imagesInput = images.querySelector('#images');
 
-// console.log(capacitySelect.validity);
-// console.log(roomNumberSelect.validity);
+imagesInput.addEventListener('invalid', function () {
+  if (imagesInput.validity.typeMismatch) {
+    imagesInput.setCustomValidity('Аватар должен быть изображением');
+  } else {
+    imagesInput.setCustomValidity('');
+  }
+});
+
+var roomNumberSelect = document.querySelector('#room_number');
+var capacitySelect = document.querySelector('#capacity');
+
+var checkCapacity = function () {
+  var numberRoom = roomNumberSelect.value;
+  var numberCapacity = capacitySelect.value;
+  if (numberRoom === '100' || numberCapacity === '0') {
+    capacitySelect.setCustomValidity('может быть только не для гостей');
+  } else if (numberRoom < numberCapacity) {
+    capacitySelect.setCustomValidity('Выберите нужное кол-во гостей: Для 3-х комнат можно выбрать 1-го, 2-х или 3-х гостей, Для 2-х комнат можно выбрать 1-го или 2-х гостей, Для 1-й комнаты можно выбрать только 1-го гостя');
+  } else {
+    capacitySelect.setCustomValidity('');
+  }
+};
+
+roomNumberSelect.addEventListener('change', function () {
+  checkCapacity();
+  capacitySelect.reportValidity();
+});
+
+capacitySelect.addEventListener('change', function () {
+  checkCapacity();
+  capacitySelect.reportValidity();
+});
+
