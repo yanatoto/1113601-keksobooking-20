@@ -11,15 +11,18 @@
 
     return pinElement;
   };
-  var quantity = 8;
-  var pins = window.data.createPins(quantity);
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < quantity; i++) {
-    fragment.appendChild(renderPin(pins[i]));
-  }
-  mapPins.appendChild(fragment);
+
+  var renderPins = function (array) {
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < array.length; i++) {
+      fragment.appendChild(renderPin(array[i]));
+    }
+    mapPins.appendChild(fragment);
+
+  };
 
   window.pin = {
-    renderPin: renderPin
+    renderPin: renderPin,
+    renderPins: renderPins
   };
 })();

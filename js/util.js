@@ -29,10 +29,17 @@
     return newArray;
   };
 
+  var removeAttributeDisabled = function (array) {
+    for (var j = 0; j < array.length; j++) {
+      array[j].removeAttribute('disabled', 'disabled');
+    }
+  };
+
   window.util = {
     padNumber: padNumber,
     getRandomArbitrary: getRandomArbitrary,
     getRandomElement: getRandomElement,
-    getRandomSubset: getRandomSubset
+    getRandomSubset: getRandomSubset,
+    removeAttributeDisabled: removeAttributeDisabled
   };
 })();

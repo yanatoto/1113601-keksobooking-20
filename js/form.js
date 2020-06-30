@@ -1,9 +1,19 @@
 'use strict';
 // Модуль form.js
+
+
 (function () {
   var adFormInput = document.querySelector('.ad-form');
   var setupPrice = adFormInput.querySelector('#price');
   var housingType = document.querySelector('#type');
+  var adForm = document.querySelector('.ad-form');
+  var adFormFieldsets = adForm.querySelectorAll('fieldset');
+  var activate = function () {
+    adForm.classList.remove('ad-form--disabled');
+
+    window.util.removeAttributeDisabled(adFormFieldsets);
+    window.form.checkCapacity();
+  };
 
   housingType.addEventListener('change', function () {
     if (housingType.value === 'bungalo') {
@@ -92,6 +102,7 @@
     capacitySelect.reportValidity();
   });
   window.form = {
-    checkCapacity: checkCapacity
+    checkCapacity: checkCapacity,
+    activate: activate
   };
 })();
