@@ -16,7 +16,7 @@
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
     var pins = window.data.createPins(8);
-    window.pins.renderPins(pins);
+    window.pin.renderPins(pins);
   };
 
 
