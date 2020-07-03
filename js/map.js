@@ -17,6 +17,8 @@
     window.util.removeAttributeDisabled(filtersSelect);
     var pins = window.data.createPins(8);
     window.pin.renderPins(pins);
+    window.form.activate();
+    window.card.open(pins[0]);
   };
 
 

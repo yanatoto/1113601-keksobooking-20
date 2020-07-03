@@ -6,43 +6,68 @@
     'bungalo': 'Бунгало',
     'palace': 'Дворец'
   };
-  var FEATURES = {
-    'wifi': 'Wi-Fi',
-    'dishwasher': 'Посудомоечная машина',
-    'parking': 'Парковка',
-    'washer': 'Стиральная машина',
-    'elevator': 'Лифт',
-    'conditioner': 'Кондиционер'
+
+  var PHOTO_WIDTH = 45;
+  var PHOTO_HEIGHT = 40;
+
+  var renderPhotos = function (photos) {
+    var fragment = document.createDocumentFragment();
+
+    for (var i = 0; i < photos.length; i++) {
+      var photo = document.createElement('img');
+      photo.src = photos[i];
+      photo.width = PHOTO_WIDTH;
+      photo.height = PHOTO_HEIGHT;
+      fragment.appendChild(photo);
+    }
+    return fragment;
   };
 
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-  var renderCard = function () {
+  var renderCard = function (data) {
 
     var cardElement = cardTemplate.cloneNode(true);
+    var cardPhotos = cardElement.querySelector('.popup__photos');
 
-    cardElement.querySelector('.popup__title').textContent = window.data.offer.title;
-    cardElement.querySelector('.popup__text--address').textContent = window.data.offer.address;
-    cardElement.querySelector('.popup__text--price').textContent = window.data.offer.price + '₽/ночь';
-    cardElement.querySelector('.popup__type').textContent = HOUSING_TYPES[window.data.offer.type];
-    cardElement.querySelector('.popup__text--capacity').textContent = window.data.offer.rooms + ' комнаты' + ' для ' + window.data.offer.guests + ' гостей';
-    cardElement.querySelector('.popup__features').textContent = FEATURES[window.data.offer.features];
-    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + window.data.offer.checkin + ', ' + 'выезд до ' + window.data.offer.checkout;
-    cardElement.querySelector('.popup__description').textContent = window.data.offer.description;
-    cardElement.querySelector('.popup__photos').querySelector('.popup__photo').src = window.data.offer.photos;
-    cardElement.src = window.data.author.avatar;
+    cardElement.querySelector('.popup__title').textContent = data.offer.title;
+    cardElement.querySelector('.popup__text--address').textContent = data.offer.address;
+    cardElement.querySelector('.popup__text--price').textContent = data.offer.price + '₽/ночь';
+    cardElement.querySelector('.popup__type').textContent = HOUSING_TYPES[data.offer.type];
+    cardElement.querySelector('.popup__text--capacity').textContent = data.offer.rooms + ' комнаты' + ' для ' + data.offer.guests + ' гостей';
+    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + data.offer.checkin + ', ' + 'выезд до ' + data.offer.checkout;
+    cardElement.querySelector('.popup__description').textContent = data.offer.description;
 
+    cardElement.querySelector('.popup__avatar').src = data.author.avatar;
+    cardPhotos.innerHTML = '';
+    cardPhotos.appendChild(renderPhotos(data.offer.photos));
+
+    var featuresList = cardElement.querySelector('.popup__features');
+    featuresList.innerHTML = '';
+    for (var i = 0; i < data.offer.features.length; i++) {
+      var str = data.offer.features[i];
+      var element = document.createElement('li');
+      element.classList.add('popup__feature');
+      element.classList.add('popup__feature--' + str);
+      featuresList.appendChild(element);
+
+    }
 
     return cardElement;
+  };
+
+  var open = function (obj) {
+
+    var newCard = renderCard(obj);
+    mapFiltersContainer.insertAdjacentElement('afterend', newCard);
 
   };
 
-  var firstCard = cardTemplate;
-  mapFiltersContainer.insertAdjacentElement('afterend', firstCard);
 
   window.card = {
-    renderCard: renderCard
+    renderCard: renderCard,
+    open: open
 
   };
 })();
