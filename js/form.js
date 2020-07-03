@@ -8,6 +8,7 @@
   var housingType = document.querySelector('#type');
   var adForm = document.querySelector('.ad-form');
   var adFormFieldsets = adForm.querySelectorAll('fieldset');
+
   var activate = function () {
     adForm.classList.remove('ad-form--disabled');
 

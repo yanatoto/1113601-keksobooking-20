@@ -43,6 +43,7 @@
     return pins;
   };
   window.data = {
-    createPins: createPins
+    createPins: createPins,
+
   };
 })();
