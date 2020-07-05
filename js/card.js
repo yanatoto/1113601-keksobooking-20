@@ -25,10 +25,11 @@
 
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var mapFiltersContainer = document.querySelector('.map__filters-container');
+  var cardElement = cardTemplate.cloneNode(true);
 
   var renderCard = function (data) {
+    popupRemove();
 
-    var cardElement = cardTemplate.cloneNode(true);
     var cardPhotos = cardElement.querySelector('.popup__photos');
 
     cardElement.querySelector('.popup__title').textContent = data.offer.title;
@@ -53,10 +54,25 @@
       featuresList.appendChild(element);
 
     }
+    var popupCloseBtn = cardElement.querySelector('.popup__close');
+    popupCloseBtn.addEventListener('click', popupRemove);
+
+    document.addEventListener('keydown', onPopupPress);
 
     return cardElement;
   };
+  var onPopupPress = function (evt) {
+    if (evt.key === 'Escape' && cardElement !== null) {
+      popupRemove();
+    }
+  };
 
+  var popupRemove = function () {
+    if (cardElement !== null) {
+      cardElement.remove();
+      document.removeEventListener('keydown', onPopupPress);
+    }
+  };
   var open = function (array) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < array.length; i++) {
