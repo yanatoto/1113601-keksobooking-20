@@ -76,7 +76,7 @@
 
     }
   };
-  var popuoOpen = function (obj) {
+  var popupOpen = function (obj) {
     var newCard = renderCard(obj);
     mapFiltersContainer.insertAdjacentElement('afterend', newCard);
 
@@ -85,7 +85,7 @@
 
   window.card = {
     renderCard: renderCard,
-    popuoOpen: popuoOpen,
+    popupOpen: popupOpen,
     popupRemove: popupRemove
 
   };

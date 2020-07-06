@@ -11,14 +11,14 @@
 
     // console.log(pin.author.avatar);
     pinElement.addEventListener('click', function () {
-      window.card.popuoOpen(pin);
+      window.card.popupOpen(pin);
       pinElement.classList.add('map__pin--active');
 
     });
 
     pinElement.addEventListener('keydown', function (evt) {
       if (evt.key === 'Enter') {
-        window.card.open(pin);
+        window.card.popupOpen(pin);
         pinElement.classList.add('map__pin--active');
       }
     });
