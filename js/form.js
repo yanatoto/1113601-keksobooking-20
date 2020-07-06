@@ -6,11 +6,15 @@
   var adFormInput = document.querySelector('.ad-form');
   var setupPrice = adFormInput.querySelector('#price');
   var housingType = document.querySelector('#type');
-  var adForm = document.querySelector('.ad-form');
-  var adFormFieldsets = adForm.querySelectorAll('fieldset');
+  var adFormFieldsets = adFormInput.querySelectorAll('fieldset');
+  var timeinSelect = adFormInput.querySelector('#timein');
+  var timeoutSelect = adFormInput.querySelector('#timeout');
+  var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
+
+  var addressInput = adFormInput.querySelector('#address');
 
   var activate = function () {
-    adForm.classList.remove('ad-form--disabled');
+    adFormInput.classList.remove('ad-form--disabled');
 
     window.util.removeAttributeDisabled(adFormFieldsets);
     window.form.checkCapacity();
@@ -42,6 +46,14 @@
     }
   });
 
+  regTimeFieldset.addEventListener('change', function (evt) {
+    var time = evt.target.value;
+    if (evt.target === timeinSelect) {
+      timeoutSelect.value = time;
+    } else {
+      timeinSelect.value = time;
+    }
+  });
 
   var titleInput = adFormInput.querySelector('#title');
 
@@ -57,25 +69,23 @@
     }
   });
 
-  var avatarInput = document.querySelector('#avatar');
-  avatarInput.addEventListener('invalid', function () {
-    if (avatarInput.validity.typeMismatch) {
-      avatarInput.setCustomValidity('Аватар должен быть изображением');
-    } else {
-      avatarInput.setCustomValidity('');
-    }
-  });
+  var avatarInput = adFormInput.querySelector('#avatar');
 
-  var images = document.querySelector('.ad-form__photo-container');
-  var imagesInput = images.querySelector('#images');
-
-  imagesInput.addEventListener('invalid', function () {
-    if (imagesInput.validity.typeMismatch) {
-      imagesInput.setCustomValidity('Аватар должен быть изображением');
-    } else {
-      imagesInput.setCustomValidity('');
+  var checkAvatarInput = function () {
+    if (avatarInput.files[0].type !== 'image/jpeg/png') {
+      avatarInput.setCustomValidity('Аватар должен быть изображением в формате jpg или png');
     }
-  });
+  };
+  avatarInput.addEventListener('change', checkAvatarInput);
+
+  var imageInput = adFormInput.querySelector('#images');
+
+  var checkImageInput = function () {
+    if (imageInput.files[0].type !== 'image/jpeg/png') {
+      imageInput.setCustomValidity('Фотография должна быть изображением в формате jpg или png');
+    }
+  };
+  imageInput.addEventListener('change', checkImageInput);
 
 
   var roomNumberSelect = document.querySelector('#room_number');
@@ -104,6 +114,7 @@
   });
   window.form = {
     checkCapacity: checkCapacity,
-    activate: activate
+    activate: activate,
+    addressInput: addressInput
   };
 })();

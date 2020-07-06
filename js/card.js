@@ -70,22 +70,23 @@
   var popupRemove = function () {
     if (cardElement !== null) {
       cardElement.remove();
+      window.pin.removeActivePin();
+
       document.removeEventListener('keydown', onPopupPress);
+
     }
   };
-  var open = function (array) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < array.length; i++) {
-      var newCard = fragment.appendChild(renderCard(array[i]));
-    }
+  var popuoOpen = function (obj) {
+    var newCard = renderCard(obj);
     mapFiltersContainer.insertAdjacentElement('afterend', newCard);
 
   };
-  // console.log(mapFiltersContainer.innerHTML);
+
 
   window.card = {
     renderCard: renderCard,
-    open: open
+    popuoOpen: popuoOpen,
+    popupRemove: popupRemove
 
   };
 })();

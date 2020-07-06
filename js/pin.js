@@ -9,6 +9,19 @@
     pinElement.querySelector('img').alt = pin.offer.title;
     pinElement.style = 'left:' + pin.location.x + 'px; top:' + pin.location.y + 'px';
 
+    // console.log(pin.author.avatar);
+    pinElement.addEventListener('click', function () {
+      window.card.popuoOpen(pin);
+      pinElement.classList.add('map__pin--active');
+
+    });
+
+    pinElement.addEventListener('keydown', function (evt) {
+      if (evt.key === 'Enter') {
+        window.card.open(pin);
+        pinElement.classList.add('map__pin--active');
+      }
+    });
     return pinElement;
   };
 
@@ -20,9 +33,17 @@
     mapPins.appendChild(fragment);
 
   };
+  var removeActivePin = function () {
+    var activePin = document.querySelector('.map__pin--active');
+    if (activePin) {
+      activePin.classList.remove('map__pin--active');
+    }
+  };
 
   window.pin = {
     renderPin: renderPin,
-    renderPins: renderPins
+    renderPins: renderPins,
+    removeActivePin: removeActivePin
+
   };
 })();
