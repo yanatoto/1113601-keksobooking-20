@@ -58,8 +58,6 @@
   var onPopupPress = function (evt) {
     if (evt.key === 'Escape') {
       popupRemove();
-    } else if (evt.key === 'Enter') {
-      popupOpen();
     }
   };
 
