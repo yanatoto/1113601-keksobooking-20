@@ -58,6 +58,8 @@
   var onPopupPress = function (evt) {
     if (evt.key === 'Escape') {
       popupRemove();
+    } else if (evt.key === 'Enter') {
+      popupOpen();
     }
   };
 
@@ -71,11 +73,11 @@
   };
 
   var popupOpen = function (obj) {
+    popupRemove();
     var newCard = renderCard(obj);
     var popupCloseBtn = newCard.querySelector('.popup__close');
     popupCloseBtn.addEventListener('click', popupRemove);
     document.addEventListener('keydown', onPopupPress);
-    popupRemove();
     mapFiltersContainer.insertAdjacentElement('afterend', newCard);
   };
 
