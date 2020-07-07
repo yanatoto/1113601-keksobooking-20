@@ -40,7 +40,8 @@
   });
 
   window.map = {
-    activate: activate
+    activate: activate,
+    mapPinMain: mapPinMain
 
   };
 })();
