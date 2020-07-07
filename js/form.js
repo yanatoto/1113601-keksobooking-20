@@ -12,26 +12,6 @@
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
   var addressInput = adFormInput.querySelector('#address');
 
-  var MAIN_PIN_WIDTH = window.pinMove.MAIN_PIN_WIDTH;
-  var MAIN_PIN_HEIGHT = window.pinMove.MAIN_PIN_HEIGHT;
-  var MAIN_PIN_ACTIVE_HEIGHT = window.pinMove.MAIN_PIN_ACTIVE_HEIGHT;
-  var mainPin = window.map.mapPinMain;
-
-  // Вычисление адреса на формы
-  var inputDefaultAddressDisabled = function () {
-    var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-    var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2);
-
-    addressInput.value = coordinateX + ', ' + coordinateY;
-  };
-
-  var inputDefaultAddressEnabled = function () {
-    var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-    var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_ACTIVE_HEIGHT);
-
-    addressInput.value = coordinateX + ', ' + coordinateY;
-  };
-
   var activate = function () {
     adFormInput.classList.remove('ad-form--disabled');
 
@@ -132,8 +112,7 @@
     capacitySelect.reportValidity();
   });
   window.form = {
-    inputDefaultAddressDisabled: inputDefaultAddressDisabled,
-    inputDefaultAddressEnabled: inputDefaultAddressEnabled,
+
     checkCapacity: checkCapacity,
     activate: activate,
     addressInput: addressInput

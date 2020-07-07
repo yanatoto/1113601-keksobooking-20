@@ -4,10 +4,6 @@
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
-  var LOCATION_X_MIN = 0;
-  var LOCATION_X_MAX = 1200;
-  var LOCATION_Y_MIN = 130;
-  var LOCATION_Y_MAX = 630;
 
   var createPins = function (pinsQuantity) {
 
@@ -50,11 +46,7 @@
   window.data = {
     createPins: createPins,
     PIN_WIDTH: PIN_WIDTH,
-    PIN_HEIGHT: PIN_HEIGHT,
-    LOCATION_X_MIN: LOCATION_X_MIN,
-    LOCATION_X_MAX: LOCATION_X_MAX,
-    LOCATION_Y_MIN: LOCATION_Y_MIN,
-    LOCATION_Y_MAX: LOCATION_Y_MAX
+    PIN_HEIGHT: PIN_HEIGHT
 
   };
 })();
