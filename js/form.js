@@ -110,11 +110,17 @@
   capacitySelect.addEventListener('change', function () {
     checkCapacity();
     capacitySelect.reportValidity();
+
   });
+
+  var setAddress = function (address) {
+    addressInput.value = address;
+
+  };
   window.form = {
 
     checkCapacity: checkCapacity,
     activate: activate,
-    addressInput: addressInput
+    setAddress: setAddress
   };
 })();

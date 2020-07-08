@@ -8,8 +8,8 @@
   var LOCATION_X_MAX = 1200;
   var LOCATION_Y_MIN = 130;
   var LOCATION_Y_MAX = 630;
-  var addressInput = window.form.addressInput;
   var mainPin = document.querySelector('.map__pin--main');
+
   // ограничение перемещения по карте
   var mapBorder = {
     top: LOCATION_Y_MIN - MAIN_PIN_ACTIVE_HEIGHT,
@@ -25,6 +25,23 @@
       y: evt.clientY
     };
 
+    // Вычисление адреса на формы
+    var inputDefaultAddressDisabled = function () {
+      var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
+      var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2);
+
+      var addressInput = window.form.setAddress(coordinateX + ', ' + coordinateY);
+      return addressInput;
+    };
+    inputDefaultAddressDisabled();
+
+    var inputDefaultAddressEnabled = function () {
+      var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
+      var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_ACTIVE_HEIGHT);
+
+      var addressInput = window.form.setAddress(coordinateX + ', ' + coordinateY);
+      return addressInput;
+    };
     var onMouseMove = function (moveEvt) {
 
       var shift = {
@@ -38,21 +55,6 @@
       };
 
 
-      // Вычисление адреса на формы
-      var inputDefaultAddressDisabled = function () {
-        var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-        var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2);
-
-        addressInput.value = coordinateX + ', ' + coordinateY;
-      };
-      inputDefaultAddressDisabled();
-
-      var inputDefaultAddressEnabled = function () {
-        var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-        var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_ACTIVE_HEIGHT);
-
-        addressInput.value = coordinateX + ', ' + coordinateY;
-      };
       // Функция проверки пределов перемещения
       if (mainPin.offsetLeft - shift.x < mapBorder.left) {
         mainPin.style.left = mapBorder.left + 'px';
@@ -81,8 +83,24 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+  // активация страницы левой кнопкой мыши
+
+  mainPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    if (evt.which === 1) {
+      window.map.activate();
+    }
+  });
+
+  // активация страницы клавишей ENTER
+  mainPin.addEventListener('keydown', function (evt) {
+    evt.preventDefault();
+    if (evt.which === 13) {
+      window.map.activate();
+    }
+  });
   window.pinMove = {
-    mainPin: mainPin,
+
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_ACTIVE_HEIGHT: MAIN_PIN_ACTIVE_HEIGHT

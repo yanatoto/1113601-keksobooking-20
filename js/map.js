@@ -21,23 +21,6 @@
   };
 
 
-  // активация страницы левой кнопкой мыши
-  var mapPinMain = window.pinMove.mainPin;
-  mapPinMain.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-    if (evt.which === 1) {
-      activate();
-    }
-  });
-
-  // активация страницы клавишей ENTER
-  mapPinMain.addEventListener('keydown', function (evt) {
-    evt.preventDefault();
-    if (evt.which === 13) {
-      activate();
-    }
-  });
-
   window.map = {
     activate: activate
 
