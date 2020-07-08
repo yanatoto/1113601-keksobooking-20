@@ -4,6 +4,7 @@
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
+
   var createPins = function (pinsQuantity) {
 
     var pins = [];
@@ -44,6 +45,8 @@
   };
   window.data = {
     createPins: createPins,
+    PIN_WIDTH: PIN_WIDTH,
+    PIN_HEIGHT: PIN_HEIGHT
 
   };
 })();

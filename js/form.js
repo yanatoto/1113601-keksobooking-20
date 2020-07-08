@@ -10,7 +10,6 @@
   var timeinSelect = adFormInput.querySelector('#timein');
   var timeoutSelect = adFormInput.querySelector('#timeout');
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
-
   var addressInput = adFormInput.querySelector('#address');
 
   var activate = function () {
@@ -111,10 +110,17 @@
   capacitySelect.addEventListener('change', function () {
     checkCapacity();
     capacitySelect.reportValidity();
+
   });
+
+  var setAddress = function (address) {
+    addressInput.value = address;
+
+  };
   window.form = {
+
     checkCapacity: checkCapacity,
     activate: activate,
-    addressInput: addressInput
+    setAddress: setAddress
   };
 })();

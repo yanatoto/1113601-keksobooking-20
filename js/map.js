@@ -8,7 +8,6 @@
   var mapFilters = document.querySelector('.map__filters');
   var filtersFieldsets = mapFilters.querySelectorAll('fieldset');
   var filtersSelect = mapFilters.querySelectorAll('select');
-
   var map = document.querySelector('.map');
 
   var activate = function () {
@@ -21,23 +20,6 @@
 
   };
 
-
-  // активация страницы левой кнопкой мыши
-  var mapPinMain = document.querySelector('.map__pin--main');
-  mapPinMain.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-    if (evt.which === 1) {
-      activate();
-    }
-  });
-
-  // активация страницы клавишей ENTER
-  mapPinMain.addEventListener('keydown', function (evt) {
-    evt.preventDefault();
-    if (evt.which === 13) {
-      activate();
-    }
-  });
 
   window.map = {
     activate: activate
