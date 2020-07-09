@@ -3,6 +3,7 @@
 (function () {
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
+
   var renderPin = function (pin) {
     var pinElement = buttonTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
@@ -24,7 +25,7 @@
     });
     return pinElement;
   };
-
+  var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
   var renderPins = function (array) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < array.length; i++) {

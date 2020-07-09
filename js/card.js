@@ -24,6 +24,7 @@
   };
 
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+
   var mapFiltersContainer = document.querySelector('.map__filters-container');
 
   var renderCard = function (data) {
@@ -84,6 +85,7 @@
     renderCard: renderCard,
     popupOpen: popupOpen,
     popupRemove: popupRemove
+
 
   };
 })();
