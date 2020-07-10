@@ -43,6 +43,7 @@
     }
     return pins;
   };
+
   window.data = {
     createPins: createPins,
     PIN_WIDTH: PIN_WIDTH,

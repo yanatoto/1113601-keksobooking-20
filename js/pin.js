@@ -3,6 +3,7 @@
 (function () {
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
+
   var renderPin = function (pin) {
     var pinElement = buttonTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
@@ -15,7 +16,8 @@
       pinElement.classList.add('map__pin--active');
 
     });
-
+    // var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    // console.log(pins);
     pinElement.addEventListener('keydown', function (evt) {
       if (evt.key === 'Enter') {
         window.card.popupOpen(pin);
@@ -24,6 +26,7 @@
     });
     return pinElement;
   };
+
 
   var renderPins = function (array) {
     var fragment = document.createDocumentFragment();

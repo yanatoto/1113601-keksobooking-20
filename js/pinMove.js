@@ -20,11 +20,19 @@
 
   // Перемещение пина
   mainPin.addEventListener('mousedown', function (evt) {
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
     };
 
+    var isActive = window.map.activate();
+    if (isActive) {
+      if (evt.which === 1) {
+        evt.preventDefault();
+        window.map.activate();
+      }
+    }
     // Вычисление адреса на формы
     var inputDefaultAddressDisabled = function () {
       var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
@@ -85,12 +93,12 @@
   });
   // активация страницы левой кнопкой мыши
 
-  mainPin.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-    if (evt.which === 1) {
-      window.map.activate();
-    }
-  });
+  // mainPin.addEventListener('mousedown', function (evt) {
+  //   evt.preventDefault();
+  //   if (evt.which === 1) {
+  //     window.map.activate();
+  //   }
+  // });
 
   // активация страницы клавишей ENTER
   mainPin.addEventListener('keydown', function (evt) {
