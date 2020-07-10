@@ -26,7 +26,7 @@
       y: evt.clientY
     };
 
-    var isActive = window.map.activate(true);
+    var isActive = window.map.activate();
     if (isActive) {
       if (evt.which === 1) {
         evt.preventDefault();
