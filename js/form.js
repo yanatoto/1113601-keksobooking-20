@@ -14,9 +14,13 @@
 
   var activate = function () {
     adFormInput.classList.remove('ad-form--disabled');
-
     window.util.removeAttributeDisabled(adFormFieldsets);
-    window.form.checkCapacity();
+    checkCapacity();
+  };
+
+  var deactivate = function () {
+    adFormInput.classList.add('ad-form--disabled');
+    window.util.setAttributeDisabled(adFormFieldsets);
   };
 
   housingType.addEventListener('change', function () {
@@ -69,7 +73,6 @@
   });
 
   var avatarInput = adFormInput.querySelector('#avatar');
-
   var checkAvatarInput = function () {
     if (avatarInput.files[0].type !== 'image/jpeg/png') {
       avatarInput.setCustomValidity('Аватар должен быть изображением в формате jpg или png');
@@ -117,10 +120,29 @@
     addressInput.value = address;
 
   };
-  window.form = {
+  var setAdForm = function (adForm) {
+    adFormInput.value = adForm;
 
-    checkCapacity: checkCapacity,
+  };
+
+  var successPostHandler = function () {
+    window.message.showMessage('success');
+  };
+
+  var errorPostHandler = function () {
+    window.message.showMessage('error');
+  };
+
+  var submitHandler = function (evt) {
+    window.backend.save(new FormData(adFormInput), successPostHandler, errorPostHandler);
+    evt.preventDefault();
+  };
+  adFormInput.addEventListener('submit', submitHandler);
+
+  window.form = {
+    setAdForm: setAdForm,
+    setAddress: setAddress,
     activate: activate,
-    setAddress: setAddress
+    deactivate: deactivate
   };
 })();

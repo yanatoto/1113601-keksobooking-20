@@ -8,6 +8,20 @@
     window.pin.renderPins(offer);
 
   };
+  var errorMessage = null;
+  var onError = function (errMessage) {
+    errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-show');
+
+    errorMessage.textContent = errMessage;
+    document.body.insertAdjacentElement('afterbegin', errorMessage);
+  };
+
+  var removeErrorMessage = function () {
+    if (errorMessage) {
+      errorMessage.remove();
+    }
+  };
   // активация страницы
 
   var mapFilters = document.querySelector('.map__filters');
@@ -26,11 +40,12 @@
     window.form.activate();
     window.backend.load(onSuccessLoad, function () {});
 
-
   };
 
   window.map = {
-    activate: activate
+    activate: activate,
+    removeErrorMessage: removeErrorMessage,
+    onError: onError
 
 
   };

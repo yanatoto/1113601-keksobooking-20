@@ -1,7 +1,7 @@
 // Модуль util.js
 'use strict';
 (function () {
-// создание числа с 0 впереди
+  // создание числа с 0 впереди
   var padNumber = function (num, size) {
     var s = num + '';
     while (s.length < size) {
@@ -9,7 +9,7 @@
     }
     return s;
   };
-  // получение случайного числа в заданном диапазоне
+    // получение случайного числа в заданном диапазоне
   var getRandomArbitrary = function (min, max) {
     return Math.random() * (max - min) + min;
   };
@@ -28,7 +28,11 @@
     }
     return newArray;
   };
-
+  var setAttributeDisabled = function (array) {
+    for (var i = 0; i < array.length; i++) {
+      array[i].disabled = !array[i].disabled;
+    }
+  };
   var removeAttributeDisabled = function (array) {
     for (var j = 0; j < array.length; j++) {
       array[j].removeAttribute('disabled', 'disabled');
@@ -36,6 +40,7 @@
   };
 
   window.util = {
+    setAttributeDisabled: setAttributeDisabled,
     padNumber: padNumber,
     getRandomArbitrary: getRandomArbitrary,
     getRandomElement: getRandomElement,

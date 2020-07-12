@@ -57,7 +57,7 @@
     return cardElement;
   };
   var onPopupPress = function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.which === 27) {
       popupRemove();
     }
   };

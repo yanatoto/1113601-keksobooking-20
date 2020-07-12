@@ -91,14 +91,6 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-  // активация страницы левой кнопкой мыши
-
-  // mainPin.addEventListener('mousedown', function (evt) {
-  //   evt.preventDefault();
-  //   if (evt.which === 1) {
-  //     window.map.activate();
-  //   }
-  // });
 
   // активация страницы клавишей ENTER
   mainPin.addEventListener('keydown', function (evt) {
