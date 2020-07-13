@@ -23,6 +23,17 @@
     window.util.setAttributeDisabled(adFormFieldsets);
   };
 
+  var formResetButton = adFormInput.querySelector('.ad-form__reset');
+
+  var pageReset = function () {
+    adFormInput.reset();
+    deactivate();
+    setAddress();
+  };
+
+  formResetButton.addEventListener('click', pageReset);
+  formResetButton.addEventListener('keydown', pageReset);
+
   housingType.addEventListener('change', function () {
     if (housingType.value === 'bungalo') {
       setupPrice.setAttribute('min', '0');
@@ -134,12 +145,13 @@
   };
 
   var submitHandler = function (evt) {
-    window.backend.save(new FormData(adFormInput), successPostHandler, errorPostHandler);
+    window.backend.upload(new FormData(adFormInput), successPostHandler, errorPostHandler);
     evt.preventDefault();
   };
   adFormInput.addEventListener('submit', submitHandler);
 
   window.form = {
+    pageReset: pageReset,
     setAdForm: setAdForm,
     setAddress: setAddress,
     activate: activate,

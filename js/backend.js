@@ -17,6 +17,8 @@
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
+
+        // console.log(xhr);
         onSuccess(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -41,7 +43,7 @@
 
   };
 
-  var save = function (data, onSuccess, onError) {
+  var upload = function (data, onSuccess, onError) {
     var xhr = createXhr(onSuccess, onError);
     xhr.open('POST', URL.POST);
     xhr.send(data);
@@ -49,6 +51,6 @@
 
   window.backend = {
     load: load,
-    save: save
+    upload: upload
   };
 })();
