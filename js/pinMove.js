@@ -26,11 +26,11 @@
       y: evt.clientY
     };
 
-    var isActive = window.map.activateMap();
+    var isActive = window.main.activatePage();
     if (isActive) {
-      if (evt.which === 1) {
+      if (evt.button === 1) {
         evt.preventDefault();
-        window.map.activateMap();
+        window.main.activatePage();
       }
     }
     // Вычисление адреса на формы
@@ -99,6 +99,9 @@
       window.main.activatePage();
     }
   });
+  // mainPin.addEventListener('mousedown', mapPinMainMousedownHandler);
+  // mainPin.addEventListener('keydown', mapPinMainKeydownHandler);
+
   window.pinMove = {
 
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,

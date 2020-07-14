@@ -28,6 +28,7 @@
   var formReset = function () {
     adFormInput.reset();
     deactivateForm();
+    window.map.deactivateMap();
     setAddress();
   };
 

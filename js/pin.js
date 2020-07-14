@@ -4,6 +4,7 @@
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
 
+
   var renderPin = function (pin) {
     var pinElement = buttonTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
@@ -40,6 +41,7 @@
       activePin.classList.remove('map__pin--active');
     }
   };
+
   var removePins = function () {
     var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     for (var j = 0; j < pins.length; j++) {
