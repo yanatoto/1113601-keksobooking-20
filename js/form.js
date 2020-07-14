@@ -12,12 +12,28 @@
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
   var addressInput = adFormInput.querySelector('#address');
 
-  var activate = function () {
+  var activateForm = function () {
     adFormInput.classList.remove('ad-form--disabled');
-
     window.util.removeAttributeDisabled(adFormFieldsets);
-    window.form.checkCapacity();
+    checkCapacity();
   };
+
+  var deactivateForm = function () {
+    adFormInput.classList.add('ad-form--disabled');
+    window.util.setAttributeDisabled(adFormFieldsets);
+  };
+
+  var formResetButton = adFormInput.querySelector('.ad-form__reset');
+
+  var formReset = function () {
+    adFormInput.reset();
+    deactivateForm();
+    window.map.deactivateMap();
+    setAddress();
+  };
+
+  formResetButton.addEventListener('click', formReset);
+  formResetButton.addEventListener('keydown', formReset);
 
   housingType.addEventListener('change', function () {
     if (housingType.value === 'bungalo') {
@@ -69,7 +85,6 @@
   });
 
   var avatarInput = adFormInput.querySelector('#avatar');
-
   var checkAvatarInput = function () {
     if (avatarInput.files[0].type !== 'image/jpeg/png') {
       avatarInput.setCustomValidity('Аватар должен быть изображением в формате jpg или png');
@@ -117,10 +132,35 @@
     addressInput.value = address;
 
   };
-  window.form = {
+  var setAdForm = function (adForm) {
+    adFormInput.value = adForm;
 
-    checkCapacity: checkCapacity,
-    activate: activate,
-    setAddress: setAddress
+  };
+
+  var successPostHandler = function () {
+    window.message.showMessage('success');
+    window.main.deactivatePage();
+  };
+
+  var errorPostHandler = function () {
+    window.message.showMessage('error');
+    window.main.deactivatePage();
+  };
+
+  var submitHandler = function (evt) {
+    window.backend.upload(new FormData(adFormInput), successPostHandler, errorPostHandler);
+    evt.preventDefault();
+  };
+
+
+  adFormInput.addEventListener('submit', submitHandler);
+
+  window.form = {
+    formReset: formReset,
+    setAdForm: setAdForm,
+    setAddress: setAddress,
+    activateForm: activateForm,
+    deactivateForm: deactivateForm
+
   };
 })();

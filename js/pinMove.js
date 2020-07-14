@@ -26,11 +26,11 @@
       y: evt.clientY
     };
 
-    var isActive = window.map.activate();
+    var isActive = window.main.activatePage();
     if (isActive) {
-      if (evt.which === 1) {
+      if (evt.button === 1) {
         evt.preventDefault();
-        window.map.activate();
+        window.main.activatePage();
       }
     }
     // Вычисление адреса на формы
@@ -91,22 +91,17 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-  // активация страницы левой кнопкой мыши
-
-  // mainPin.addEventListener('mousedown', function (evt) {
-  //   evt.preventDefault();
-  //   if (evt.which === 1) {
-  //     window.map.activate();
-  //   }
-  // });
 
   // активация страницы клавишей ENTER
   mainPin.addEventListener('keydown', function (evt) {
     evt.preventDefault();
-    if (evt.which === 13) {
-      window.map.activate();
+    if (evt.keyCode === 'Enter') {
+      window.main.activatePage();
     }
   });
+  // mainPin.addEventListener('mousedown', mapPinMainMousedownHandler);
+  // mainPin.addEventListener('keydown', mapPinMainKeydownHandler);
+
   window.pinMove = {
 
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
