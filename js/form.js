@@ -148,6 +148,10 @@
         window.backend.upload(new FormData(adFormInput), successPostHandler, errorPostHandler);
         evt.preventDefault();
     };
+var setResetInactiveModus = function () {
+        window.map.deactivate();
+        pageReset();
+};
 
     adFormInput.addEventListener('submit', submitHandler);
 
@@ -156,6 +160,7 @@
         setAdForm: setAdForm,
         setAddress: setAddress,
         activate: activate,
-        deactivate: deactivate
+        deactivate: deactivate,
+        setResetInactiveModus: setResetInactiveModus
     };
 })();

@@ -25,16 +25,19 @@
         //errorButton.addEventListener('click', closeMessage);
 
     };
+    var setsuccessText = function (successText) {
+      successText.value = successText;
+
+    };
 
     var closeMessage = function (evt) {
         if (successText && evt.keyCode === 27 || evt.button === 0) {
             successText.remove();
-            window.form.pageReset();
-            window.map.deactivate();
+            window.form.setResetInactiveModus();
+
         } if (errorText && evt.keyCode === 27 || evt.button === 0) {
             errorText.remove();
-            window.form.pageReset();
-            window.map.deactivate();
+            window.form.setResetInactiveModus();
         }
         document.removeEventListener('click', closeMessage);
         document.removeEventListener('keydown', closeMessage);
@@ -44,5 +47,6 @@
     window.message = {
         closeMessage: closeMessage,
         showMessage: showMessage
+
     };
 })();
