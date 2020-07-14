@@ -9,9 +9,9 @@
   };
 
   var deactivatePage = function () {
-    // window.form.deactivateForm();
+    window.form.formReset();
+    window.form.deactivateForm();
     window.map.deactivateMap();
-    window.form.resetForm();
 
   };
 
