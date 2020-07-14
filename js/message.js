@@ -27,7 +27,7 @@
   };
 
   var closeMessage = function (evt) {
-    if (successText && evt.key === 'Escape'|| evt.button === 0) {
+    if (successText && evt.key === 'Escape' || evt.button === 0) {
       successText.remove();
       window.main.deactivatePage();
 
