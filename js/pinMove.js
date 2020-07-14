@@ -95,7 +95,7 @@
   // активация страницы клавишей ENTER
   mainPin.addEventListener('keydown', function (evt) {
     evt.preventDefault();
-    if (evt.which === 13) {
+    if (evt.keyCode === 'Enter') {
       window.main.activatePage();
     }
   });
