@@ -1,56 +1,56 @@
 'use strict';
 
 (function () {
-  var URL = {
-    GET: 'https://javascript.pages.academy/keksobooking/data',
-    POST: 'https://javascript.pages.academy/keksobooking'
-  };
-  var StatusCode = {
-    OK: 200
-  };
-  var TIMEOUT_IN_MS = 5000;
+    var URL = {
+        GET: 'https://javascript.pages.academy/keksobooking/data',
+        POST: 'https://javascript.pages.academy/keksobooking'
+    };
+    var StatusCode = {
+        OK: 200
+    };
+    var TIMEOUT_IN_MS = 5000;
 
-  var createXhr = function (onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.timeout = TIMEOUT_IN_MS;
+    var createXhr = function (onSuccess, onError) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        xhr.timeout = TIMEOUT_IN_MS;
 
-    xhr.addEventListener('load', function () {
-      if (xhr.status === StatusCode.OK) {
+        xhr.addEventListener('load', function () {
+            if (xhr.status === StatusCode.OK) {
 
-        // console.log(xhr);
-        onSuccess(xhr.response);
-      } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-      }
-    });
+                // console.log(xhr);
+                onSuccess(xhr.response);
+            } else {
+                onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+            }
+        });
 
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
+        xhr.addEventListener('error', function () {
+            onError('Произошла ошибка соединения');
+        });
 
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
+        xhr.addEventListener('timeout', function () {
+            onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+        });
 
-    return xhr;
-  };
+        return xhr;
+    };
 
-  var load = function (onSuccess, onError) {
-    var xhr = createXhr(onSuccess, onError);
-    xhr.open('GET', URL.GET);
-    xhr.send();
+    var load = function (onSuccess, onError) {
+        var xhr = createXhr(onSuccess, onError);
+        xhr.open('GET', URL.GET);
+        xhr.send();
 
-  };
+    };
 
-  var upload = function (data, onSuccess, onError) {
-    var xhr = createXhr(onSuccess, onError);
-    xhr.open('POST', URL.POST);
-    xhr.send(data);
-  };
+    var upload = function (data, onSuccess, onError) {
+        var xhr = createXhr(onSuccess, onError);
+        xhr.open('POST', URL.POST);
+        xhr.send(data);
+    };
 
-  window.backend = {
-    load: load,
-    upload: upload
-  };
+    window.backend = {
+        load: load,
+        upload: upload
+    };
 })();
