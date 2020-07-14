@@ -17,17 +17,17 @@
     var map = document.querySelector('.map');
 
 
-    var activate = function () {
+    var activateMap = function () {
         map.classList.remove('map--faded');
         window.util.removeAttributeDisabled(filtersFieldsets);
         window.util.removeAttributeDisabled(filtersSelect);
         window.form.setAddress();
-        window.form.activate();
+        window.form.activateForm();
         window.backend.load(onSuccessLoad, function () {});
 
     };
 
-    var deactivate = function () {
+    var deactivateMap = function () {
         map.classList.add('map--faded');
         window.util.setAttributeDisabled(filtersFieldsets);
         window.util.setAttributeDisabled(filtersSelect);
@@ -37,8 +37,8 @@
     };
 
     window.map = {
-        activate: activate,
-        deactivate: deactivate
+      activateMap: activateMap,
+      deactivateMap: deactivateMap
 
 
     };

@@ -12,27 +12,27 @@
     var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
     var addressInput = adFormInput.querySelector('#address');
 
-    var activate = function () {
+    var activateForm = function () {
         adFormInput.classList.remove('ad-form--disabled');
         window.util.removeAttributeDisabled(adFormFieldsets);
         checkCapacity();
     };
 
-    var deactivate = function () {
+    var deactivateForm = function () {
         adFormInput.classList.add('ad-form--disabled');
         window.util.setAttributeDisabled(adFormFieldsets);
     };
 
     var formResetButton = adFormInput.querySelector('.ad-form__reset');
 
-    var pageReset = function () {
+    var formReset = function () {
         adFormInput.reset();
-        deactivate();
+        deactivateForm();
         setAddress();
     };
 
-    formResetButton.addEventListener('click', pageReset);
-    formResetButton.addEventListener('keydown', pageReset);
+    formResetButton.addEventListener('click', formReset);
+    formResetButton.addEventListener('keydown', formReset);
 
     housingType.addEventListener('change', function () {
         if (housingType.value === 'bungalo') {
@@ -138,29 +138,28 @@
 
     var successPostHandler = function () {
         window.message.showMessage('success');
+        window.main.deactivatePage();
     };
 
     var errorPostHandler = function () {
         window.message.showMessage('error');
+        window.main.deactivatePage();
     };
 
     var submitHandler = function (evt) {
         window.backend.upload(new FormData(adFormInput), successPostHandler, errorPostHandler);
         evt.preventDefault();
     };
-var setResetInactiveModus = function () {
-        window.map.deactivate();
-        pageReset();
-};
+
 
     adFormInput.addEventListener('submit', submitHandler);
 
     window.form = {
-        pageReset: pageReset,
+        formReset: formReset,
         setAdForm: setAdForm,
         setAddress: setAddress,
-        activate: activate,
-        deactivate: deactivate,
-        setResetInactiveModus: setResetInactiveModus
+        activateForm: activateForm,
+        deactivateForm: deactivateForm
+
     };
 })();

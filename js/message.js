@@ -31,13 +31,13 @@
     };
 
     var closeMessage = function (evt) {
-        if (successText && evt.keyCode === 27 || evt.button === 0) {
+        if (successText && evt.key === 'Escape'|| evt.button === 0) {
             successText.remove();
-            window.form.setResetInactiveModus();
+            window.main.deactivatePage();
 
-        } if (errorText && evt.keyCode === 27 || evt.button === 0) {
+        } if (errorText && evt.key === 'Escape' || evt.button === 0) {
             errorText.remove();
-            window.form.setResetInactiveModus();
+            window.main.deactivatePage();
         }
         document.removeEventListener('click', closeMessage);
         document.removeEventListener('keydown', closeMessage);

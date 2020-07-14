@@ -26,11 +26,11 @@
       y: evt.clientY
     };
 
-    var isActive = window.map.activate();
+    var isActive = window.map.activateMap();
     if (isActive) {
       if (evt.which === 1) {
         evt.preventDefault();
-        window.map.activate();
+        window.map.activateMap();
       }
     }
     // Вычисление адреса на формы
@@ -96,7 +96,7 @@
   mainPin.addEventListener('keydown', function (evt) {
     evt.preventDefault();
     if (evt.which === 13) {
-      window.map.activate();
+      window.main.activatePage();
     }
   });
   window.pinMove = {
