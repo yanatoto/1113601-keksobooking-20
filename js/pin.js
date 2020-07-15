@@ -4,12 +4,12 @@
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
 
-
   var renderPin = function (pin) {
     var pinElement = buttonTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
     pinElement.querySelector('img').alt = pin.offer.title;
     pinElement.style = 'left:' + pin.location.x + 'px; top:' + pin.location.y + 'px';
+
 
     pinElement.addEventListener('click', function () {
       window.card.popupOpen(pin);
@@ -26,11 +26,13 @@
     return pinElement;
   };
 
-
-  var renderPins = function (array) {
+  var USER_COUNT = 5;
+  var renderPins = function (users) {
+    var activeAds = users.slice(0, Math.min(users.length, USER_COUNT));
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < array.length; i++) {
-      fragment.appendChild(renderPin(array[i]));
+    for (var i = 0; i < activeAds.length; i++) {
+      fragment.appendChild(renderPin(activeAds[i]));
+
     }
     mapPins.appendChild(fragment);
 

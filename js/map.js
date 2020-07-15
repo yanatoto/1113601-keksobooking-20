@@ -4,12 +4,19 @@
 (function () {
 
 
-  var onSuccessLoad = function (offer) {
-    window.pin.renderPins(offer);
+  var onSuccessLoad = function (data) {
+    arrayOffers = data;
+    window.filters.updateOffers();
+    window.main.activatePage();
+
 
   };
 
-  // активация страницы
+  var arrayOffers = [];
+  var getArrayOffers = function () {
+    return arrayOffers;
+  };
+
 
   var mapFilters = document.querySelector('.map__filters');
   var filtersFieldsets = mapFilters.querySelectorAll('fieldset');
@@ -37,6 +44,7 @@
   };
 
   window.map = {
+    getArrayOffers: getArrayOffers,
     activateMap: activateMap,
     deactivateMap: deactivateMap
 
