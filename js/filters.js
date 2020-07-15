@@ -12,6 +12,7 @@
   });
 
   var updateOffers = function () {
+
     var filterValue = window.map.getArrayOffers().filter(filterHousingType);
     window.pin.renderPins(filterValue);
   };

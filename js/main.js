@@ -13,6 +13,7 @@
     window.form.formReset();
     window.form.deactivateForm();
     window.map.deactivateMap();
+    window.message.closeMessage();
 
 
   };

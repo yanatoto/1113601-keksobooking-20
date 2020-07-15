@@ -10,9 +10,9 @@
   var LOCATION_Y_MAX = 630;
   var mainPin = document.querySelector('.map__pin--main');
 
-  var setMainPin = function (Pin) {
-    mainPin.value = Pin;
-  };
+  // var setMainPin = function (Pin) {
+  //   mainPin.value = Pin;
+  // };
 
   // ограничение перемещения по карте
   var mapBorder = {
@@ -105,7 +105,7 @@
   });
 
   window.pinMove = {
-    setMainPin: setMainPin,
+    // setMainPin: setMainPin,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_ACTIVE_HEIGHT: MAIN_PIN_ACTIVE_HEIGHT

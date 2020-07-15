@@ -26,12 +26,11 @@
     return pinElement;
   };
 
-  var USER_COUNT = 5;
-  var renderPins = function (users) {
-    var activeAds = users.slice(0, Math.min(users.length, USER_COUNT));
+
+  var renderPins = function (array) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < activeAds.length; i++) {
-      fragment.appendChild(renderPin(activeAds[i]));
+    for (var i = 0; i < array.length; i++) {
+      fragment.appendChild(renderPin(array[i]));
 
     }
     mapPins.appendChild(fragment);
