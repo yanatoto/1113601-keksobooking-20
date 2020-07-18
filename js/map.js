@@ -6,6 +6,7 @@
   var arrayOffers = [];
 
   var getArrayOffers = function () {
+
     return arrayOffers;
   };
 
