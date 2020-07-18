@@ -14,7 +14,7 @@
 
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.filters.updateOffers();
+    window.filters.updateFilteredOffers(data);
     window.pin.renderPins(getSlicedArray(data, MAX_PIN_COUNT));
 
 
