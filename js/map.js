@@ -10,19 +10,17 @@
     return arrayOffers;
   };
 
-  var MAX_PIN_COUNT = 5;
-
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.filters.updateFilteredOffers(data);
-    window.pin.renderPins(getSlicedArray(data, MAX_PIN_COUNT));
+    var filteredData = window.filters.filterAdverts(data);
+    window.pin.renderPins(filteredData);
 
 
   };
-  var getSlicedArray = function (array, itemCount) {
-    var resultItemCount = Math.min(array.length, itemCount);
-    return array.slice(0, resultItemCount);
-  };
+  // var getSlicedArray = function (array, itemCount) {
+  //   var resultItemCount = Math.min(array.length, itemCount);
+  //   return array.slice(0, resultItemCount);
+  // };
 
   var errorMessage = null;
   var onErrorLoad = function (errMessage) {

@@ -10,7 +10,6 @@
   var housingPrice = mapFilters.querySelector('#housing-price');
   var housingRooms = mapFilters.querySelector('#housing-rooms');
   var housingGuests = mapFilters.querySelector('#housing-guests');
-  var housingFeatures = mapFilters.querySelectorAll('#housing-features input:checked');
 
   var PRICE_LOW = 10000;
   var PRICE_HIGH = 50000;
@@ -21,7 +20,7 @@
 
     for (var i = 0; i < data.length; i++) {
       item = data[i];
-      var labelHousingFeatures = false;
+
       if (!(housingType.value === DEFAULT_FILTER_VALUE || housingType.value === item.offer.type)) {
         continue;
       }
@@ -49,15 +48,13 @@
       } else if (!(housingGuests.value === DEFAULT_FILTER_VALUE || housingGuests.value === item.offer.value)) {
         continue;
 
-      } else if (housingFeatures.length > 0) {
-        for (var k = 0; k < housingFeatures.length; k++) {
-          if (item.offer.features.indexOf(housingFeatures[k].value) === -1) {
-            labelHousingFeatures = true;
-          }
-        }
       }
 
-      if (labelHousingFeatures) {
+      var checkedFeatures = Array.from(mapFilters.querySelectorAll('#housing-features input:checked'));
+      var checkFeatures = checkedFeatures.every(function (element) {
+        return item.offer.features.includes(element.value);
+      });
+      if (!checkFeatures) {
         continue;
       }
 
@@ -69,18 +66,17 @@
     }
     return filtered;
   };
-  var updateFilteredOffers = function (data) {
-    mapFilters.addEventListener('change', window.debounce(function () {
-      window.card.popupRemove();
-      window.pin.removePins();
-      window.pin.renderPins(filterAdverts(data));
 
-    }));
-  };
 
+  mapFilters.addEventListener('change', window.debounce(function () {
+    window.card.popupRemove();
+    window.pin.removePins();
+    window.pin.renderPins(filterAdverts(window.map.getArrayOffers()));
+
+  }));
 
   window.filters = {
-    updateFilteredOffers: updateFilteredOffers
+    filterAdverts: filterAdverts
 
   };
 
