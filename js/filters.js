@@ -3,7 +3,7 @@
 
 (function () {
   var DEFAULT_FILTER_VALUE = 'any';
-  var MAX_PIN_COUNT = 5;
+  // var MAX_PIN_COUNT = 5;
 
   var mapFilters = document.querySelector('.map__filters');
   var housingType = mapFilters.querySelector('#housing-type');
@@ -60,20 +60,20 @@
 
       filtered.push(item);
 
-      if (filtered.length >= MAX_PIN_COUNT) {
-        break;
-      }
+      // if (filtered.length >= MAX_PIN_COUNT) {
+      //   break;
+      // }
     }
     return filtered;
   };
 
 
-  mapFilters.addEventListener('change', window.debounce(function () {
+  mapFilters.addEventListener('change', function () {
     window.card.popupRemove();
     window.pin.removePins();
     window.pin.renderPins(filterAdverts(window.map.getArrayOffers()));
 
-  }));
+  });
 
   window.filters = {
     filterAdverts: filterAdverts
