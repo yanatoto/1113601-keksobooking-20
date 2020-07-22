@@ -34,10 +34,13 @@
       closeMessage();
     }
   };
+
   var closeMessage = function (evt) {
     var element = document.querySelector('message');
+    // console.log(element);
     if (element) {
       element.remove(evt);
+      document.removeEventListener('keydown', onDocumentKeydown);
       document.removeEventListener('keydown', onDocumentKeydown);
       window.main.deactivatePage();
     }
