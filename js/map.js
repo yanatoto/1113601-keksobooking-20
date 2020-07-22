@@ -12,7 +12,6 @@
   // var MAX_PIN_COUNT = 5;
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.filters.filterAdverts(data);
     window.pin.renderPins(window.filters.filterAdverts(data));
 
 
