@@ -24,18 +24,17 @@
 
 
   };
-  // var onMessageClose = function (evt) {
-  //   if (evt.target.classList.contains('message') || evt.target.classList.contains('error__button')) {
-  //     closeMessage();
-  //   }
-  // };
+
+
   var onDocumentKeydown = function (evt) {
     if (evt.key === 'Escape') {
       closeMessage();
     }
   };
+
   var closeMessage = function (evt) {
-    var element = document.querySelector('message');
+    var element = document.querySelector('div > p');
+    // console.log(element);
     if (element) {
       element.remove(evt);
       document.removeEventListener('keydown', onDocumentKeydown);
