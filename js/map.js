@@ -9,18 +9,18 @@
 
     return arrayOffers;
   };
-  var MAX_PIN_COUNT = 5;
+  // var MAX_PIN_COUNT = 5;
   var onSuccessLoad = function (data) {
     arrayOffers = data;
     window.filters.filterAdverts(data);
-    window.pin.renderPins(getSlicedArray(data, MAX_PIN_COUNT));
+    window.pin.renderPins(window.filters(data));
 
 
   };
-  var getSlicedArray = function (array, itemCount) {
-    var resultItemCount = Math.min(array.length, itemCount);
-    return array.slice(0, resultItemCount);
-  };
+  // var getSlicedArray = function (array, itemCount) {
+  //   var resultItemCount = Math.min(array.length, itemCount);
+  //   return array.slice(0, resultItemCount);
+  // };
 
   var errorMessage = null;
   var onErrorLoad = function (errMessage) {
