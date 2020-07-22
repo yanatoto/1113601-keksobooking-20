@@ -39,7 +39,9 @@
     }
   };
 
+
   window.util = {
+
     setAttributeDisabled: setAttributeDisabled,
     padNumber: padNumber,
     getRandomArbitrary: getRandomArbitrary,

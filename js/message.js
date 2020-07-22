@@ -21,8 +21,7 @@
     }
     document.addEventListener('click', closeMessage);
     document.addEventListener('keydown', closeMessage);
-    // var errorButton = document.querySelector('.error__button');
-    // errorButton.addEventListener('click', closeMessage);
+
 
   };
 
