@@ -17,7 +17,7 @@
   var filterAdverts = function (data) {
     var filtered = [];
     var item;
-
+    var checkedFeatures = Array.from(mapFilters.querySelectorAll('#housing-features input:checked'));
     for (var i = 0; i < data.length; i++) {
       item = data[i];
 
@@ -50,7 +50,6 @@
 
       }
 
-      var checkedFeatures = Array.from(mapFilters.querySelectorAll('#housing-features input:checked'));
       var checkFeatures = checkedFeatures.every(function (element) {
         return item.offer.features.includes(element.value);
       });
