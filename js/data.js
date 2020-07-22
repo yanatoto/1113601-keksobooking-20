@@ -1,6 +1,5 @@
 'use strict';
-// Модуль data.js
-// Генерирует массив объектов из случайных значений
+
 (function () {
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;

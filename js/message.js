@@ -24,20 +24,24 @@
 
 
   };
-
+  // var onMessageClose = function (evt) {
+  //   if (evt.target.classList.contains('message') || evt.target.classList.contains('error__button')) {
+  //     closeMessage();
+  //   }
+  // };
+  var onDocumentKeydown = function (evt) {
+    if (evt.key === 'Escape') {
+      closeMessage();
+    }
+  };
   var closeMessage = function (evt) {
-    if (successText && evt.key === 'Escape' || evt.button === 0) {
-      successText.remove();
-      window.main.deactivatePage();
-
-    } if (errorText && evt.key === 'Escape' || evt.button === 0) {
-      errorText.remove();
+    var element = document.querySelector('message');
+    if (element) {
+      element.remove(evt);
+      document.removeEventListener('keydown', onDocumentKeydown);
       window.main.deactivatePage();
     }
-    document.removeEventListener('click', closeMessage);
-    document.removeEventListener('keydown', closeMessage);
   };
-
 
   window.message = {
     closeMessage: closeMessage,

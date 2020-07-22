@@ -1,6 +1,5 @@
 'use strict';
 
-// Модуль map.js
 (function () {
 
   var arrayOffers = [];
@@ -9,17 +8,13 @@
 
     return arrayOffers;
   };
-  // var MAX_PIN_COUNT = 5;
+
   var onSuccessLoad = function (data) {
     arrayOffers = data;
     window.pin.renderPins(window.filters.filterAdverts(data));
 
 
   };
-  // var getSlicedArray = function (array, itemCount) {
-  //   var resultItemCount = Math.min(array.length, itemCount);
-  //   return array.slice(0, resultItemCount);
-  // };
 
   var errorMessage = null;
   var onErrorLoad = function (errMessage) {

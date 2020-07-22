@@ -1,5 +1,5 @@
 'use strict';
-// Модуль pin.js
+
 (function () {
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
