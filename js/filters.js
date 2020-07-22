@@ -67,12 +67,12 @@
   };
 
 
-  mapFilters.addEventListener('change', function () {
+  mapFilters.addEventListener('change', window.debounce(function () {
     window.card.popupRemove();
     window.pin.removePins();
     window.pin.renderPins(filterAdverts(window.map.getArrayOffers()));
 
-  });
+  }));
 
   window.filters = {
     filterAdverts: filterAdverts

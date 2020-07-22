@@ -27,7 +27,7 @@
   };
 
 
-  var renderPins = window.debounce(function (array) {
+  var renderPins = function (array) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < array.length; i++) {
       fragment.appendChild(renderPin(array[i]));
@@ -35,7 +35,8 @@
     }
     mapPins.appendChild(fragment);
 
-  });
+  };
+
   var removeActivePin = function () {
     var activePin = document.querySelector('.map__pin--active');
     if (activePin) {
