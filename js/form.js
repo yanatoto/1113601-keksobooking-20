@@ -140,11 +140,13 @@
   var successPostHandler = function () {
     window.message.showMessage('success');
     window.main.deactivatePage();
+
   };
 
   var errorPostHandler = function () {
     window.message.showMessage('error');
     window.main.deactivatePage();
+
   };
 
   var submitHandler = function (evt) {

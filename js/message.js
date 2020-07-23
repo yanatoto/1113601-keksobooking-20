@@ -7,6 +7,8 @@
   var errorText = errorTemplate.cloneNode(true);
   var mainBlock = document.querySelector('main');
 
+  var errorButton = errorTemplate.querySelector('.error__button');
+  errorButton.addEventListener('click', closeMessage);
 
   var showMessage = function (result) {
     switch (result) {
@@ -22,23 +24,23 @@
     document.addEventListener('click', closeMessage);
     document.addEventListener('keydown', closeMessage);
 
-
   };
 
 
   var onDocumentKeydown = function (evt) {
     if (evt.key === 'Escape') {
       closeMessage();
+      window.main.deactivatePage();
     }
   };
 
   var closeMessage = function (evt) {
-    var element = document.querySelector('div > p');
-    // console.log(element);
+
+    var element = document.querySelector('.success__message');
     if (element) {
       element.remove(evt);
       document.removeEventListener('keydown', onDocumentKeydown);
-      window.main.deactivatePage();
+
     }
   };
 
