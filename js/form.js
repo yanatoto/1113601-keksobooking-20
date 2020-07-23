@@ -137,20 +137,20 @@
 
   };
 
-  var successPostHandler = function () {
+  var onSuccessload = function () {
     window.message.showSuccessMessage();
     window.main.deactivatePage();
 
   };
 
-  var errorPostHandler = function () {
+  var onErrorload = function () {
     window.message.showErrorMessage();
     window.main.deactivatePage();
 
   };
 
   var submitHandler = function (evt) {
-    window.backend.upload(new FormData(adFormInput), successPostHandler, errorPostHandler);
+    window.backend.upload(new FormData(adFormInput), onSuccessload, onErrorload);
     evt.preventDefault();
   };
 
