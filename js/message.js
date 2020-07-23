@@ -1,52 +1,60 @@
 'use strict';
 
 (function () {
-  var successTemplate = document.querySelector('#success').content.querySelector('.success');
-  var errorTemplate = document.querySelector('#error').content.querySelector('.error');
-  var successText = successTemplate.cloneNode(true);
-  var errorText = errorTemplate.cloneNode(true);
+
   var mainBlock = document.querySelector('main');
 
-  var errorButton = errorTemplate.querySelector('.error__button');
-  errorButton.addEventListener('click', closeMessage);
+  var showSuccessMessage = function () {
+    var successTemplate = document.querySelector('#success').content.querySelector('.success');
+    var successMessage = successTemplate.cloneNode(true);
+    mainBlock.appendChild(successMessage);
 
-  var showMessage = function (result) {
-    switch (result) {
-      case 'success':
-        document.body.appendChild(successText);
+    document.addEventListener('keydown', onDocumentKeydown);
+    document.addEventListener('mousedown', closeSuccessMessage);
+  };
 
-        break;
-      case 'error':
-        mainBlock.appendChild(errorText);
+  var closeSuccessMessage = function () {
+    var successElement = document.querySelector('.success');
+    successElement.remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
+    document.removeEventListener('mousedown', closeSuccessMessage);
+  };
 
-        break;
-    }
-    document.addEventListener('click', closeMessage);
-    document.addEventListener('keydown', closeMessage);
+  var showErrorMessage = function (errorMessage) {
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+    var error = errorTemplate.cloneNode(true);
+    error.querySelector('.error__message').textContent = errorMessage;
+    error.querySelector('.error__button').addEventListener('click', closeErrorMessage);
+    mainBlock.appendChild(error);
 
+    document.addEventListener('keydown', onDocumentKeydown);
+    document.addEventListener('mousedown', closeErrorMessage);
+  };
+
+  var closeErrorMessage = function () {
+    var errorElement = document.querySelector('.error');
+    errorElement.remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
+    document.removeEventListener('mousedown', closeErrorMessage);
   };
 
 
   var onDocumentKeydown = function (evt) {
-    if (evt.key === 'Escape') {
-      closeMessage();
-      window.main.deactivatePage();
-    }
-  };
-
-  var closeMessage = function (evt) {
-
-    var element = document.querySelector('.success__message');
-    if (element) {
-      element.remove(evt);
-      document.removeEventListener('keydown', onDocumentKeydown);
-
+    if (showSuccessMessage && document.querySelector('.success')) {
+      if (evt.key === 'Escape') {
+        closeSuccessMessage();
+      }
+    } else if (showErrorMessage && document.querySelector('.error')) {
+      if (evt.key === 'Escape') {
+        closeErrorMessage();
+      }
     }
   };
 
   window.message = {
-    closeMessage: closeMessage,
-    showMessage: showMessage
+
+    showSuccessMessage: showSuccessMessage,
+    showErrorMessage: showErrorMessage
 
   };
 })();

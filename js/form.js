@@ -138,13 +138,13 @@
   };
 
   var successPostHandler = function () {
-    window.message.showMessage('success');
+    window.message.showSuccessMessage();
     window.main.deactivatePage();
 
   };
 
   var errorPostHandler = function () {
-    window.message.showMessage('error');
+    window.message.showErrorMessage();
     window.main.deactivatePage();
 
   };
