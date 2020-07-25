@@ -1,5 +1,5 @@
 'use strict';
-// Модуль pin.js
+
 (function () {
   var buttonTemplate = document.querySelector('#pin').content.querySelector('button');
   var mapPins = document.querySelector('.map__pins');
@@ -17,24 +17,16 @@
 
     });
 
-    pinElement.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Enter') {
-        window.card.popupOpen(pin);
-        pinElement.classList.add('map__pin--active');
-      }
-    });
     return pinElement;
   };
 
 
   var renderPins = function (array) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < array.length; i++) {
-      fragment.appendChild(renderPin(array[i]));
-
-    }
+    array.forEach(function (item) {
+      fragment.appendChild(renderPin(item));
+    });
     mapPins.appendChild(fragment);
-
   };
 
   var removeActivePin = function () {
@@ -46,15 +38,15 @@
 
   var removePins = function () {
     var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-    for (var j = 0; j < pins.length; j++) {
-      pins[j].remove();
-    }
+    pins.forEach(function (element) {
+      element.remove();
+    });
   };
 
   window.pin = {
-    renderPin: renderPin,
+
     renderPins: renderPins,
-    removeActivePin: removeActivePin,
+    removeActive: removeActivePin,
     removePins: removePins
 
   };

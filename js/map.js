@@ -1,6 +1,5 @@
 'use strict';
 
-// Модуль map.js
 (function () {
 
   var arrayOffers = [];
@@ -9,17 +8,13 @@
 
     return arrayOffers;
   };
-  // var MAX_PIN_COUNT = 5;
+
   var onSuccessLoad = function (data) {
     arrayOffers = data;
     window.pin.renderPins(window.filters.filterAdverts(data));
 
 
   };
-  // var getSlicedArray = function (array, itemCount) {
-  //   var resultItemCount = Math.min(array.length, itemCount);
-  //   return array.slice(0, resultItemCount);
-  // };
 
   var errorMessage = null;
   var onErrorLoad = function (errMessage) {
@@ -46,8 +41,8 @@
     map.classList.remove('map--faded');
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
-    window.form.setAddress();
-    window.form.activateForm();
+    // window.form.setAddress();
+    window.form.activate();
     window.backend.load(onSuccessLoad, onErrorLoad);
 
   };
@@ -65,8 +60,8 @@
   window.map = {
     removeErrorMessage: removeErrorMessage,
     getArrayOffers: getArrayOffers,
-    activateMap: activateMap,
-    deactivateMap: deactivateMap
+    activate: activateMap,
+    deactivate: deactivateMap
 
 
   };
