@@ -1,6 +1,4 @@
 'use strict';
-// Модуль form.js
-
 
 (function () {
   var adFormInput = document.querySelector('.ad-form');
@@ -25,15 +23,18 @@
 
   var formResetButton = adFormInput.querySelector('.ad-form__reset');
 
+  var onResetClick = function () {
+    formReset();
+  };
   var formReset = function () {
     adFormInput.reset();
     deactivateForm();
-    window.map.deactivateMap();
-    setAddress();
+    window.map.deactivate();
+
   };
 
-  formResetButton.addEventListener('click', formReset);
-  formResetButton.addEventListener('keydown', formReset);
+
+  formResetButton.addEventListener('click', onResetClick);
 
   housingType.addEventListener('change', function () {
     if (housingType.value === 'bungalo') {
@@ -132,10 +133,6 @@
     addressInput.value = address;
 
   };
-  var setAdForm = function (adForm) {
-    adFormInput.value = adForm;
-
-  };
 
   var onSuccessload = function () {
     window.message.showSuccessMessage();
@@ -158,11 +155,10 @@
   adFormInput.addEventListener('submit', submitHandler);
 
   window.form = {
-    formReset: formReset,
-    setAdForm: setAdForm,
+    reset: formReset,
     setAddress: setAddress,
-    activateForm: activateForm,
-    deactivateForm: deactivateForm
+    activate: activateForm,
+    deactivate: deactivateForm
 
   };
 })();

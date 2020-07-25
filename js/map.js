@@ -11,7 +11,7 @@
 
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.pin.renderPins(window.filters.filterAdverts(data));
+    window.pin.render(window.filters.filterAdverts(data));
 
 
   };
@@ -42,7 +42,7 @@
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
     window.form.setAddress();
-    window.form.activateForm();
+    window.form.activate();
     window.backend.load(onSuccessLoad, onErrorLoad);
 
   };
@@ -60,8 +60,8 @@
   window.map = {
     removeErrorMessage: removeErrorMessage,
     getArrayOffers: getArrayOffers,
-    activateMap: activateMap,
-    deactivateMap: deactivateMap
+    activate: activateMap,
+    deactivate: deactivateMap
 
 
   };

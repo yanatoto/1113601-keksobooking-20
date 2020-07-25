@@ -13,13 +13,14 @@
   var renderPhotos = function (photos) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < photos.length; i++) {
+    photos.forEach(function (item) {
       var photo = document.createElement('img');
-      photo.src = photos[i];
+      photo.src = item;
       photo.width = PHOTO_WIDTH;
       photo.height = PHOTO_HEIGHT;
       fragment.appendChild(photo);
-    }
+
+    });
     return fragment;
   };
 
@@ -45,17 +46,17 @@
 
     var featuresList = cardElement.querySelector('.popup__features');
     featuresList.innerHTML = '';
-    for (var i = 0; i < data.offer.features.length; i++) {
-      var str = data.offer.features[i];
+    data.offer.features.forEach(function (item) {
+      var str = item;
       var element = document.createElement('li');
       element.classList.add('popup__feature');
       element.classList.add('popup__feature--' + str);
       featuresList.appendChild(element);
-
-    }
+    });
 
     return cardElement;
   };
+
   var onPopupPress = function (evt) {
     if (evt.key === 'Escape') {
       popupRemove();
@@ -66,7 +67,7 @@
     var oldCard = document.querySelector('.map__card');
     if (oldCard) {
       oldCard.remove();
-      window.pin.removeActivePin();
+      window.pin.removeActive();
       document.removeEventListener('keydown', onPopupPress);
     }
   };
@@ -82,7 +83,7 @@
 
 
   window.card = {
-    renderCard: renderCard,
+
     popupOpen: popupOpen,
     popupRemove: popupRemove
 

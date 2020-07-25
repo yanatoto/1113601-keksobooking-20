@@ -4,16 +4,15 @@
 
 
   var activatePage = function () {
-    window.form.activateForm();
-    window.map.activateMap();
+    window.form.activate();
+    window.map.activate();
 
   };
 
   var deactivatePage = function () {
-    window.form.formReset();
-    window.form.deactivateForm();
-    window.map.deactivateMap();
-    // window.message.closeMessage();
+    window.form.reset();
+    window.form.deactivate();
+    window.map.deactivate();
 
 
   };

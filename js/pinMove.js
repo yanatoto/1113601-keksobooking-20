@@ -10,7 +10,6 @@
   var LOCATION_Y_MAX = 630;
   var mainPin = document.querySelector('.map__pin--main');
 
-  // ограничение перемещения по карте
   var mapBorder = {
     top: LOCATION_Y_MIN - MAIN_PIN_ACTIVE_HEIGHT,
     bottom: LOCATION_Y_MAX - MAIN_PIN_ACTIVE_HEIGHT,
@@ -18,7 +17,6 @@
     right: LOCATION_X_MAX - Math.round(MAIN_PIN_WIDTH / 2)
   };
 
-  // Перемещение пина
   mainPin.addEventListener('mousedown', function (evt) {
 
     var startCoords = {
@@ -33,7 +31,7 @@
         window.main.activatePage();
       }
     }
-    // Вычисление адреса на формы
+
     var inputDefaultAddressDisabled = function () {
       var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
       var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2);
@@ -63,7 +61,6 @@
       };
 
 
-      // Функция проверки пределов перемещения
       if (mainPin.offsetLeft - shift.x < mapBorder.left) {
         mainPin.style.left = mapBorder.left + 'px';
       } else if (mainPin.offsetLeft - shift.x > mapBorder.right) {
@@ -92,7 +89,6 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  // активация страницы клавишей ENTER
   mainPin.addEventListener('keydown', function (evt) {
     evt.preventDefault();
     if (evt.keyCode === 'Enter') {
