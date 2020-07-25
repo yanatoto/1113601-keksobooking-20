@@ -11,7 +11,7 @@
 
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.pin.render(window.filters.filterAdverts(data));
+    window.pin.renderPins(window.filters.filterAdverts(data));
 
 
   };
@@ -41,7 +41,7 @@
     map.classList.remove('map--faded');
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
-    window.form.setAddress();
+    // window.form.setAddress();
     window.form.activate();
     window.backend.load(onSuccessLoad, onErrorLoad);
 

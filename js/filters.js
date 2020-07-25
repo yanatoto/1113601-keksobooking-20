@@ -70,7 +70,7 @@
   mapFilters.addEventListener('change', window.debounce(function () {
     window.card.popupRemove();
     window.pin.removePins();
-    window.pin.render(filterAdverts(window.map.getArrayOffers()));
+    window.pin.renderPins(filterAdverts(window.map.getArrayOffers()));
 
   }));
 
