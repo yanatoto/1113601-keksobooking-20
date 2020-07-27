@@ -11,7 +11,7 @@
 
   var onSuccessLoad = function (data) {
     arrayOffers = data;
-    window.pin.renderPins(window.filters.filterAdverts(data));
+    window.pin.render(window.filters.filterAdverts(data));
 
 
   };
@@ -41,7 +41,6 @@
     map.classList.remove('map--faded');
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
-    // window.form.setAddress();
     window.form.activate();
     window.backend.load(onSuccessLoad, onErrorLoad);
 
@@ -51,8 +50,8 @@
     map.classList.add('map--faded');
     window.util.setAttributeDisabled(filtersFieldsets);
     window.util.setAttributeDisabled(filtersSelect);
-    window.pin.removePins();
-    window.card.popupRemove();
+    window.pin.remove();
+    window.card.onPopupRemove();
     removeErrorMessage();
 
   };

@@ -85,30 +85,6 @@
     }
   });
 
-  // var userAvatarInput = adFormInput.querySelector('.ad-form__field');
-  // var userAvatarPreview = document.querySelector('.ad-form-header__preview');
-
-  // console.log(housingPhotosView);
-
-  // var avatarInput = adFormInput.querySelector('#avatar');
-  // var checkAvatarInput = function () {
-  //   if (avatarInput.files[0].type !== 'image/jpeg/png') {
-  //     avatarInput.setCustomValidity('Аватар должен быть изображением в формате jpg или png');
-  //   }
-  // };
-  // avatarInput.addEventListener('change', checkAvatarInput);
-
-  // var housingPhotosUpload = adFormInput.querySelector('.ad-form__upload');
-  // var housingPhotosView = document.querySelector('.ad-form__photo');
-  // var imageInput = adFormInput.querySelector('#images');
-
-  // var checkImageInput = function () {
-  //   if (imageInput.files[0].type !== 'image/jpeg/png') {
-  //     imageInput.setCustomValidity('Фотография должна быть изображением в формате jpg или png');
-  //   }
-  // };
-  // imageInput.addEventListener('change', checkImageInput);
-
 
   var roomNumberSelect = document.querySelector('#room_number');
   var capacitySelect = document.querySelector('#capacity');
@@ -153,13 +129,13 @@
 
   };
 
-  var submitHandler = function (evt) {
+  var onSubmitSend = function (evt) {
     window.backend.upload(new FormData(adFormInput), onSuccessload, onErrorload);
     evt.preventDefault();
   };
 
 
-  adFormInput.addEventListener('submit', submitHandler);
+  adFormInput.addEventListener('submit', onSubmitSend);
 
   window.form = {
     reset: formReset,

@@ -5,9 +5,7 @@
     GET: 'https://javascript.pages.academy/keksobooking/data',
     POST: 'https://javascript.pages.academy/keksobooking'
   };
-  var StatusCode = {
-    OK: 200
-  };
+  var SUCCESS_STATUS = 200;
   var TIMEOUT_IN_MS = 5000;
 
   var createXhr = function (onSuccess, onError) {
@@ -16,7 +14,7 @@
     xhr.timeout = TIMEOUT_IN_MS;
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === StatusCode.OK) {
+      if (xhr.status === SUCCESS_STATUS.OK) {
 
         onSuccess(xhr.response);
       } else {

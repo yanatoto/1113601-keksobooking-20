@@ -12,7 +12,7 @@
 
 
     pinElement.addEventListener('click', function () {
-      window.card.popupOpen(pin);
+      window.card.onPopupRemove(pin);
       pinElement.classList.add('map__pin--active');
 
     });
@@ -21,7 +21,7 @@
   };
 
 
-  var renderPins = function (array) {
+  var render = function (array) {
     var fragment = document.createDocumentFragment();
     array.forEach(function (item) {
       fragment.appendChild(renderPin(item));
@@ -36,7 +36,7 @@
     }
   };
 
-  var removePins = function () {
+  var remove = function () {
     var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     pins.forEach(function (element) {
       element.remove();
@@ -45,9 +45,9 @@
 
   window.pin = {
 
-    renderPins: renderPins,
+    render: render,
     removeActive: removeActivePin,
-    removePins: removePins
+    remove: remove
 
   };
 })();

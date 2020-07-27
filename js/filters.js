@@ -15,7 +15,7 @@
   var PRICE_HIGH = 50000;
 
   var filterAdverts = function (data) {
-    var filtered = [];
+    var adverts = [];
     var item;
     var checkedFeatures = Array.from(mapFilters.querySelectorAll('#housing-features input:checked'));
     for (var i = 0; i < data.length; i++) {
@@ -57,20 +57,20 @@
         continue;
       }
 
-      filtered.push(item);
+      adverts.push(item);
 
-      if (filtered.length >= MAX_PIN_COUNT) {
+      if (adverts.length >= MAX_PIN_COUNT) {
         break;
       }
     }
-    return filtered;
+    return adverts;
   };
 
 
   mapFilters.addEventListener('change', window.debounce(function () {
-    window.card.popupRemove();
-    window.pin.removePins();
-    window.pin.renderPins(filterAdverts(window.map.getArrayOffers()));
+    window.card.onPopupRemove();
+    window.pin.remove();
+    window.pin.render(filterAdverts(window.map.getArrayOffers()));
 
   }));
 
