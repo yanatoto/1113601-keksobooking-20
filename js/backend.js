@@ -14,7 +14,7 @@
     xhr.timeout = TIMEOUT_IN_MS;
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === SUCCESS_STATUS.OK) {
+      if (xhr.status === SUCCESS_STATUS) {
 
         onSuccess(xhr.response);
       } else {

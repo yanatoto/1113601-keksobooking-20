@@ -43,9 +43,9 @@
       if (!checkPrice) {
         continue;
 
-      } else if (!(housingRooms.value === DEFAULT_FILTER_VALUE || housingRooms.value === item.offer.value)) {
+      } else if (!(housingRooms.value === DEFAULT_FILTER_VALUE || Number(housingRooms.value) === item.offer.value)) {
         continue;
-      } else if (!(housingGuests.value === DEFAULT_FILTER_VALUE || housingGuests.value === item.offer.value)) {
+      } else if (!(housingGuests.value === DEFAULT_FILTER_VALUE || Number(housingGuests.value) <= item.offer.value)) {
         continue;
 
       }

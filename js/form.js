@@ -10,25 +10,25 @@
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
   var addressInput = adFormInput.querySelector('#address');
 
-  var activateForm = function () {
+  var activate = function () {
     adFormInput.classList.remove('ad-form--disabled');
     window.util.removeAttributeDisabled(adFormFieldsets);
     checkCapacity();
   };
 
-  var deactivateForm = function () {
+  var deactivate = function () {
     adFormInput.classList.add('ad-form--disabled');
     window.util.setAttributeDisabled(adFormFieldsets);
   };
+  deactivate();
 
   var formResetButton = adFormInput.querySelector('.ad-form__reset');
-
   var onResetClick = function () {
-    formReset();
+    reset();
   };
-  var formReset = function () {
+  var reset = function () {
     adFormInput.reset();
-    deactivateForm();
+    deactivate();
     window.map.deactivate();
 
   };
@@ -138,10 +138,10 @@
   adFormInput.addEventListener('submit', onSubmitSend);
 
   window.form = {
-    reset: formReset,
+    reset: reset,
     setAddress: setAddress,
-    activate: activateForm,
-    deactivate: deactivateForm
+    activate: activate,
+    deactivate: deactivate
 
   };
 })();
