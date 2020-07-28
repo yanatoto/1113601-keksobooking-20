@@ -1,6 +1,5 @@
 'use strict';
 
-
 (function () {
   var DEFAULT_FILTER_VALUE = 'any';
   var MAX_PIN_COUNT = 5;
@@ -40,14 +39,13 @@
           checkPrice = PRICE_LOW < item.offer.price && item.offer.price < PRICE_HIGH;
           break;
       }
+
       if (!checkPrice) {
         continue;
-
       } else if (!(housingRooms.value === DEFAULT_FILTER_VALUE || Number(housingRooms.value) === item.offer.rooms)) {
         continue;
       } else if (!(housingGuests.value === DEFAULT_FILTER_VALUE || Number(housingGuests.value) <= item.offer.guests)) {
         continue;
-
       }
 
       var checkFeatures = checkedFeatures.every(function (element) {
@@ -66,17 +64,19 @@
     return filteredAdverts;
   };
 
+  var reset = function () {
+    mapFilters.reset();
+  };
 
   mapFilters.addEventListener('change', window.debounce(function () {
-    window.card.onPopupRemove();
+    window.card.close();
     window.pin.remove();
     window.pin.render(filterAdverts(window.map.getArrayOffers()));
-
   }));
 
   window.filters = {
-    filterAdverts: filterAdverts
-
+    filterAdverts: filterAdverts,
+    reset: reset
   };
 
 }());
