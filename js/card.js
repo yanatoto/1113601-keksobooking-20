@@ -59,11 +59,11 @@
 
   var onPopupPress = function (evt) {
     if (evt.key === 'Escape') {
-      popupRemove();
+      onPopupRemove();
     }
   };
 
-  var popupRemove = function () {
+  var onPopupRemove = function () {
     var oldCard = document.querySelector('.map__card');
     if (oldCard) {
       oldCard.remove();
@@ -73,10 +73,10 @@
   };
 
   var popupOpen = function (obj) {
-    popupRemove();
+    onPopupRemove();
     var newCard = renderCard(obj);
     var popupCloseBtn = newCard.querySelector('.popup__close');
-    popupCloseBtn.addEventListener('click', popupRemove);
+    popupCloseBtn.addEventListener('click', onPopupRemove);
     document.addEventListener('keydown', onPopupPress);
     mapFiltersContainer.insertAdjacentElement('afterend', newCard);
   };
@@ -85,7 +85,7 @@
   window.card = {
 
     popupOpen: popupOpen,
-    popupRemove: popupRemove
+    onPopupRemove: onPopupRemove
 
 
   };
