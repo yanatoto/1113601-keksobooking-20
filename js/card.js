@@ -1,5 +1,9 @@
 'use strict';
+
 (function () {
+  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var mapFiltersContainer = document.querySelector('.map__filters-container');
+
   var HOUSING_TYPES = {
     'flat': 'Квартира',
     'house': 'Дом',
@@ -23,10 +27,6 @@
     });
     return fragment;
   };
-
-  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
-
-  var mapFiltersContainer = document.querySelector('.map__filters-container');
 
   var renderCard = function (data) {
     var cardElement = cardTemplate.cloneNode(true);
@@ -59,11 +59,11 @@
 
   var onPopupPress = function (evt) {
     if (evt.key === 'Escape') {
-      onPopupRemove();
+      close();
     }
   };
 
-  var onPopupRemove = function () {
+  var close = function () {
     var oldCard = document.querySelector('.map__card');
     if (oldCard) {
       oldCard.remove();
@@ -73,20 +73,16 @@
   };
 
   var popupOpen = function (obj) {
-    onPopupRemove();
+    close();
     var newCard = renderCard(obj);
     var popupCloseBtn = newCard.querySelector('.popup__close');
-    popupCloseBtn.addEventListener('click', onPopupRemove);
+    popupCloseBtn.addEventListener('click', close);
     document.addEventListener('keydown', onPopupPress);
     mapFiltersContainer.insertAdjacentElement('afterend', newCard);
   };
 
-
   window.card = {
-
     popupOpen: popupOpen,
-    onPopupRemove: onPopupRemove
-
-
+    close: close
   };
 })();

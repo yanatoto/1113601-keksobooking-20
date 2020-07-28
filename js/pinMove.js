@@ -1,6 +1,6 @@
 'use strict';
-(function () {
 
+(function () {
   var MAIN_PIN_WIDTH = 65;
   var MAIN_PIN_HEIGHT = 65;
   var MAIN_PIN_ACTIVE_HEIGHT = 84;
@@ -9,6 +9,7 @@
   var LOCATION_Y_MIN = 130;
   var LOCATION_Y_MAX = 630;
   var mainPin = document.querySelector('.map__pin--main');
+  var initStyle = mainPin.getAttribute('style');
 
   var mapBorder = {
     top: LOCATION_Y_MIN - MAIN_PIN_ACTIVE_HEIGHT,
@@ -17,37 +18,24 @@
     right: LOCATION_X_MAX - Math.round(MAIN_PIN_WIDTH / 2)
   };
 
+  var getCoordinates = function() {
+    var shiftY = (window.main.isActive()) ? MAIN_PIN_ACTIVE_HEIGHT : MAIN_PIN_HEIGHT / 2;
+    var x = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
+    var y = Math.round(mainPin.offsetTop + shiftY);
+
+    return x + ', ' + y;
+  }
+
   mainPin.addEventListener('mousedown', function (evt) {
+    if (evt.button === 1) {
+      window.main.activatePage();
+    }
 
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
     };
 
-    var isActive = window.main.activatePage();
-    if (isActive) {
-      if (evt.button === 1) {
-        evt.preventDefault();
-        window.main.activatePage();
-      }
-    }
-
-    var inputDefaultAddressDisabled = function () {
-      var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-      var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_HEIGHT / 2);
-
-      var addressInput = window.form.setAddress(coordinateX + ', ' + coordinateY);
-      return addressInput;
-    };
-    inputDefaultAddressDisabled();
-
-    var inputDefaultAddressEnabled = function () {
-      var coordinateX = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
-      var coordinateY = Math.round(mainPin.offsetTop + MAIN_PIN_ACTIVE_HEIGHT);
-
-      var addressInput = window.form.setAddress(coordinateX + ', ' + coordinateY);
-      return addressInput;
-    };
     var onMouseMove = function (moveEvt) {
 
       var shift = {
@@ -77,7 +65,7 @@
         mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
       }
 
-      inputDefaultAddressEnabled();
+      window.form.setAddress(getCoordinates());
     };
 
     var onMouseUp = function () {
@@ -89,18 +77,19 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  mainPin.addEventListener('keydown', function (evt) {
-    evt.preventDefault();
-    if (evt.keyCode === 'Enter') {
-      window.main.activatePage();
-    }
+  mainPin.addEventListener('click', function (evt) {
+    window.main.activatePage();
   });
 
-  window.pinMove = {
+  var reset = function () {
+    mainPin.style = initStyle;
+  }
 
+  window.pinMove = {
+    reset: reset,
+    getCoordinates: getCoordinates,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_ACTIVE_HEIGHT: MAIN_PIN_ACTIVE_HEIGHT
-
   };
 })();

@@ -9,30 +9,27 @@
   var timeoutSelect = adFormInput.querySelector('#timeout');
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
   var addressInput = adFormInput.querySelector('#address');
+  var formResetButton = adFormInput.querySelector('.ad-form__reset');
 
   var activateForm = function () {
     adFormInput.classList.remove('ad-form--disabled');
-    window.util.removeAttributeDisabled(adFormFieldsets);
+    window.util.setDisabled(adFormFieldsets, false);
     checkCapacity();
   };
 
   var deactivateForm = function () {
+    formReset();
     adFormInput.classList.add('ad-form--disabled');
-    window.util.setAttributeDisabled(adFormFieldsets);
+    window.util.setDisabled(adFormFieldsets, true);
   };
-
-  var formResetButton = adFormInput.querySelector('.ad-form__reset');
 
   var onResetClick = function () {
-    formReset();
+    window.main.deactivatePage();
   };
+
   var formReset = function () {
     adFormInput.reset();
-    deactivateForm();
-    window.map.deactivate();
-
   };
-
 
   formResetButton.addEventListener('click', onResetClick);
 
@@ -116,34 +113,28 @@
     } else {
       capacitySelect.setCustomValidity('');
     }
+    capacitySelect.reportValidity();
   };
 
   roomNumberSelect.addEventListener('change', function () {
     checkCapacity();
-    capacitySelect.reportValidity();
   });
 
   capacitySelect.addEventListener('change', function () {
     checkCapacity();
-    capacitySelect.reportValidity();
-
   });
 
   var setAddress = function (address) {
     addressInput.value = address;
-
   };
 
   var onSuccessload = function () {
     window.message.showSuccess();
     window.main.deactivatePage();
-
   };
 
-  var onErrorload = function () {
-    window.message.showError();
-    window.main.deactivatePage();
-
+  var onErrorload = function (error) {
+    window.message.showError(error);
   };
 
   var onSubmitSend = function (evt) {
@@ -151,7 +142,6 @@
     evt.preventDefault();
   };
 
-  deactivateForm();
   adFormInput.addEventListener('submit', onSubmitSend);
 
   window.form = {
@@ -159,6 +149,5 @@
     setAddress: setAddress,
     activate: activateForm,
     deactivate: deactivateForm
-
   };
 })();

@@ -44,10 +44,8 @@
   };
 
   window.pin = {
-
     render: renderPins,
     removeActive: removeActivePin,
     remove: removePins
-
   };
 })();
