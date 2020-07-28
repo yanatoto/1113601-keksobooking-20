@@ -18,13 +18,13 @@
     right: LOCATION_X_MAX - Math.round(MAIN_PIN_WIDTH / 2)
   };
 
-  var getCoordinates = function() {
+  var getCoordinates = function () {
     var shiftY = (window.main.isActive()) ? MAIN_PIN_ACTIVE_HEIGHT : MAIN_PIN_HEIGHT / 2;
     var x = Math.round(mainPin.offsetLeft + MAIN_PIN_WIDTH / 2);
     var y = Math.round(mainPin.offsetTop + shiftY);
 
     return x + ', ' + y;
-  }
+  };
 
   mainPin.addEventListener('mousedown', function (evt) {
     if (evt.button === 1) {
@@ -77,13 +77,13 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  mainPin.addEventListener('click', function (evt) {
+  mainPin.addEventListener('click', function () {
     window.main.activatePage();
   });
 
   var reset = function () {
     mainPin.style = initStyle;
-  }
+  };
 
   window.pinMove = {
     reset: reset,
