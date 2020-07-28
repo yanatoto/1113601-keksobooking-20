@@ -41,6 +41,7 @@
     map.classList.remove('map--faded');
     window.util.removeAttributeDisabled(filtersFieldsets);
     window.util.removeAttributeDisabled(filtersSelect);
+    // window.form.setAddress();
     window.form.activate();
     window.backend.load(onSuccessLoad, onErrorLoad);
 

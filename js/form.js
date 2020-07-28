@@ -10,25 +10,25 @@
   var regTimeFieldset = adFormInput.querySelector('.ad-form__element--time');
   var addressInput = adFormInput.querySelector('#address');
 
-  var activate = function () {
+  var activateForm = function () {
     adFormInput.classList.remove('ad-form--disabled');
     window.util.removeAttributeDisabled(adFormFieldsets);
     checkCapacity();
   };
 
-  var deactivate = function () {
+  var deactivateForm = function () {
     adFormInput.classList.add('ad-form--disabled');
     window.util.setAttributeDisabled(adFormFieldsets);
   };
-  deactivate();
 
   var formResetButton = adFormInput.querySelector('.ad-form__reset');
+
   var onResetClick = function () {
-    reset();
+    formReset();
   };
-  var reset = function () {
+  var formReset = function () {
     adFormInput.reset();
-    deactivate();
+    deactivateForm();
     window.map.deactivate();
 
   };
@@ -85,6 +85,23 @@
     }
   });
 
+  var avatarInput = adFormInput.querySelector('#avatar');
+  var checkAvatarInput = function () {
+    if (avatarInput.files[0].type !== 'image/jpeg/png') {
+      avatarInput.setCustomValidity('Аватар должен быть изображением в формате jpg или png');
+    }
+  };
+  avatarInput.addEventListener('change', checkAvatarInput);
+
+  var imageInput = adFormInput.querySelector('#images');
+
+  var checkImageInput = function () {
+    if (imageInput.files[0].type !== 'image/jpeg/png') {
+      imageInput.setCustomValidity('Фотография должна быть изображением в формате jpg или png');
+    }
+  };
+  imageInput.addEventListener('change', checkImageInput);
+
 
   var roomNumberSelect = document.querySelector('#room_number');
   var capacitySelect = document.querySelector('#capacity');
@@ -118,13 +135,13 @@
   };
 
   var onSuccessload = function () {
-    window.message.showSuccessMessage();
+    window.message.showSuccess();
     window.main.deactivatePage();
 
   };
 
   var onErrorload = function () {
-    window.message.showErrorMessage();
+    window.message.showError();
     window.main.deactivatePage();
 
   };
@@ -134,14 +151,14 @@
     evt.preventDefault();
   };
 
-
+  deactivateForm();
   adFormInput.addEventListener('submit', onSubmitSend);
 
   window.form = {
-    reset: reset,
+    reset: formReset,
     setAddress: setAddress,
-    activate: activate,
-    deactivate: deactivate
+    activate: activateForm,
+    deactivate: deactivateForm
 
   };
 })();
