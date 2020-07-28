@@ -21,7 +21,7 @@
   };
 
 
-  var render = function (array) {
+  var renderPins = function (array) {
     var fragment = document.createDocumentFragment();
     array.forEach(function (item) {
       fragment.appendChild(renderPin(item));
@@ -36,7 +36,7 @@
     }
   };
 
-  var remove = function () {
+  var removePins = function () {
     var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     pins.forEach(function (element) {
       element.remove();
@@ -45,9 +45,9 @@
 
   window.pin = {
 
-    render: render,
+    render: renderPins,
     removeActive: removeActivePin,
-    remove: remove
+    remove: removePins
 
   };
 })();

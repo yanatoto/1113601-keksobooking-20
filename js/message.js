@@ -47,7 +47,7 @@
   };
 
   window.message = {
-    showSuccessMessage: showSuccessMessage,
-    showErrorMessage: showErrorMessage
+    showSuccess: showSuccessMessage,
+    showError: showErrorMessage
   };
 })();
